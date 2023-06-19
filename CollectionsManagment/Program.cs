@@ -1,3 +1,6 @@
+using CollectionsManagment.DataBase;
+using Microsoft.EntityFrameworkCore;
+
 namespace CollectionsManagment
 {
     public class Program
@@ -5,9 +8,15 @@ namespace CollectionsManagment
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            var connectionString = builder.Configuration.GetConnectionString("Default");
+            //dependency Injection DataBase
+            builder.Services.AddDbContext<CollectionsManagmentContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
+
 
             var app = builder.Build();
 
