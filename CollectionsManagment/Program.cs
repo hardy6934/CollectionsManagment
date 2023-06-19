@@ -17,6 +17,9 @@ namespace CollectionsManagment
             //dependency Injection DataBase
             builder.Services.AddDbContext<CollectionsManagmentContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
 
+            //dependency Injection AutoMapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
             var app = builder.Build();
 
