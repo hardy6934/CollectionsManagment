@@ -1,5 +1,9 @@
+using CollectionsManagment.Abstractions.GenRepositoryAbstractions;
 using CollectionsManagment.DataBase;
+using CollectionsManagment.DataBase.Entities;
+using CollectionsManagment.GenericRepository.GenRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace CollectionsManagment
 {
@@ -20,6 +24,18 @@ namespace CollectionsManagment
             //dependency Injection AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+             
+            //Dependency Injection GenericRepository
+            builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+            builder.Services.AddScoped<IRepository<Account>, Repository<Account>>();
+            builder.Services.AddScoped<IRepository<Role>, Repository<Role>>();
+            builder.Services.AddScoped<IRepository<Collection>, Repository<Collection>>();
+            builder.Services.AddScoped<IRepository<Comment>, Repository<Comment>>();
+            builder.Services.AddScoped<IRepository<Item>, Repository<Item>>();
+            builder.Services.AddScoped<IRepository<Like>, Repository<Like>>(); 
+
+            //Dependency Injection UnitOfWork
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 

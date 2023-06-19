@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CollectionsManagment.Abstractions\CollectionsManagment.Abstractions.csproj" />
     <ProjectReference Include="..\CollectionsManagment.DataBase\CollectionsManagment.DataBase.csproj" />
+    <ProjectReference Include="..\CollectionsManagment.GenericRepository\CollectionsManagment.GenericRepository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
