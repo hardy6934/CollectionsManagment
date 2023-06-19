@@ -24,7 +24,11 @@ namespace CollectionsManagment
             //dependency Injection AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+
+            //Dependency Injection Services 
+           // builder.Services.AddScoped<, >();
              
+
             //Dependency Injection GenericRepository
             builder.Services.AddScoped<IRepository<User>, Repository<User>>();
             builder.Services.AddScoped<IRepository<Account>, Repository<Account>>();

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsManagment.Generi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsManagment.Abstractions", "CollectionsManagment.Abstractions\CollectionsManagment.Abstractions.csproj", "{EC242D79-0F34-4A1E-84A4-70F1D83584B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsManagment.Buisness", "CollectionsManagment.Buisness\CollectionsManagment.Buisness.csproj", "{DA1DDE3E-3B7D-446B-8F10-8A820EACAAC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsManagment.Core", "CollectionsManagment.Core\CollectionsManagment.Core.csproj", "{D0E00150-BA5E-40AC-BF99-5E373DC3912A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{EC242D79-0F34-4A1E-84A4-70F1D83584B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC242D79-0F34-4A1E-84A4-70F1D83584B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC242D79-0F34-4A1E-84A4-70F1D83584B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1DDE3E-3B7D-446B-8F10-8A820EACAAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1DDE3E-3B7D-446B-8F10-8A820EACAAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1DDE3E-3B7D-446B-8F10-8A820EACAAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1DDE3E-3B7D-446B-8F10-8A820EACAAC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E00150-BA5E-40AC-BF99-5E373DC3912A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E00150-BA5E-40AC-BF99-5E373DC3912A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E00150-BA5E-40AC-BF99-5E373DC3912A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E00150-BA5E-40AC-BF99-5E373DC3912A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
