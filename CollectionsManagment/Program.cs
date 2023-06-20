@@ -3,6 +3,8 @@ using CollectionsManagment.DataBase;
 using CollectionsManagment.DataBase.Entities;
 using CollectionsManagment.GenericRepository.GenRepository;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
 using System.Numerics;
 
 namespace CollectionsManagment
@@ -12,7 +14,14 @@ namespace CollectionsManagment
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-             
+
+
+            //serilog
+           builder.Host.UseSerilog((ctx, lc) =>
+           lc.WriteTo.File(@"..\..\data.log",
+           LogEventLevel.Information).WriteTo.Console(LogEventLevel.Verbose)
+           );
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -24,10 +33,10 @@ namespace CollectionsManagment
             //dependency Injection AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-
+            
             //Dependency Injection Services 
-           // builder.Services.AddScoped<, >();
-             
+            // builder.Services.AddScoped<, >();
+
 
             //Dependency Injection GenericRepository
             builder.Services.AddScoped<IRepository<User>, Repository<User>>();
