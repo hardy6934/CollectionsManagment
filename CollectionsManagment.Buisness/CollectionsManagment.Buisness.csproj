@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CollectionsManagment.Abstractions\CollectionsManagment.Abstractions.csproj" />
+    <ProjectReference Include="..\CollectionsManagment.Core\CollectionsManagment.Core.csproj" />
   </ItemGroup>
 
 </Project>

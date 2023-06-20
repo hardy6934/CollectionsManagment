@@ -14,8 +14,10 @@ namespace CollectionsManagment.Core.DataTransferObjects
         public string Location { get; set; }
 
         public int AccountId { get; set; } 
+        public string AccountEmail { get; set; }
 
         public int RoleId { get; set; } 
-        public List<CollectionDTO> CollectionsDTO { get; set; }
+        public string RoleName { get; set; }
+        public List<CollectionDTO>? CollectionsDTO { get; set; }
     }
 }

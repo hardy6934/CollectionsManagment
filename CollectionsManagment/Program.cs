@@ -1,7 +1,10 @@
 using CollectionsManagment.Abstractions.GenRepositoryAbstractions;
+using CollectionsManagment.Buisness.Services;
+using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.DataBase;
 using CollectionsManagment.DataBase.Entities;
 using CollectionsManagment.GenericRepository.GenRepository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -14,17 +17,24 @@ namespace CollectionsManagment
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-
+             
             //serilog
-           builder.Host.UseSerilog((ctx, lc) =>
-           lc.WriteTo.File(@"..\..\data.log",
-           LogEventLevel.Information).WriteTo.Console(LogEventLevel.Verbose)
-           );
+            builder.Host.UseSerilog((ctx, lc) =>
+            lc.WriteTo.File(@"E:\Itransition\CollectionsManagment\data.log",
+            LogEventLevel.Information).WriteTo.Console(LogEventLevel.Verbose)
+            );
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(options =>
+               {
+                   options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                   options.AccessDeniedPath = new PathString("/Account/Authentication");
+                   options.LoginPath = new PathString("/Account/Authentication");
+               });
+             
 
             var connectionString = builder.Configuration.GetConnectionString("Default");
             //dependency Injection DataBase
@@ -35,7 +45,9 @@ namespace CollectionsManagment
 
             
             //Dependency Injection Services 
-            // builder.Services.AddScoped<, >();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
 
             //Dependency Injection GenericRepository
@@ -63,9 +75,10 @@ namespace CollectionsManagment
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
+            app.UseRouting(); 
 
-            app.UseAuthorization();
+            app.UseAuthentication(); // Set HttpContex.User
+            app.UseAuthorization();  // Check Users Succes 
 
             app.MapControllerRoute(
                 name: "default",
