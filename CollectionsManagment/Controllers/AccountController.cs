@@ -56,7 +56,7 @@ namespace CollectionsManagment.Controllers
                         {
                             var accountId = await accountService.GetIdAccountByEmailAsync(email);
                             var IdRole = await roleService.FindRoleIdByRoleName("User");
-                            var defaultuser = userService.CreateDefaultUserAsync(accountId, IdRole);
+                            var defaultuser =   userService.CreateDefaultUser(accountId, IdRole);
                             var Userentity = await userService.CreateUserAsync(defaultuser);
 
                             if (Userentity > 0)

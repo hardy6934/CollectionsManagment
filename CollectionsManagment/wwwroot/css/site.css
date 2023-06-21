@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.authorize {
+    width:50%;
+    margin:0 auto;
+}

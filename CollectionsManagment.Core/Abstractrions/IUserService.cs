@@ -12,7 +12,7 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<UserDTO> GetUserByIdAsync(int id);
 
         Task<int> CreateUserAsync(UserDTO dto);
-        UserDTO CreateDefaultUserAsync(int IdAccount, int IdRole);
+        UserDTO CreateDefaultUser(int IdAccount, int IdRole);
         Task<UserDTO> GetUsersByAccountId(int AccountId);
         Task<List<UserDTO>> GetAllUsers();
         Task<int> UpdateUserAsync(UserDTO dto);

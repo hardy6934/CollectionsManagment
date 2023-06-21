@@ -25,7 +25,7 @@ namespace CollectionsManagment.Buisness.Services
 
         }
 
-        public UserDTO CreateDefaultUserAsync(int IdAccount, int IdRole)
+        public UserDTO CreateDefaultUser(int IdAccount, int IdRole)
         {
             try
             {
