@@ -12,6 +12,7 @@ namespace CollectionsManagment.DataBase.Entities
         public string FullName { get; set; }
         public DateTime Birthday { get; set; }
         public string Location { get; set; }
+        public string? FilePath { get; set; }
 
         public int AccountId { get; set; }
         public Account Account { get; set; }

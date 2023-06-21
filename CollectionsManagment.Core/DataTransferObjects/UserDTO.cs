@@ -12,6 +12,7 @@ namespace CollectionsManagment.Core.DataTransferObjects
         public string FullName { get; set; }
         public DateTime Birthday { get; set; }
         public string Location { get; set; }
+        public string? FilePath { get; set; }
 
         public int AccountId { get; set; } 
         public string AccountEmail { get; set; }

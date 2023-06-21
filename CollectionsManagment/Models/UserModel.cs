@@ -1,4 +1,6 @@
-﻿namespace CollectionsManagment.Models
+﻿using Microsoft.AspNetCore.Http;
+
+namespace CollectionsManagment.Models
 {
     public class UserModel
     {
@@ -6,6 +8,7 @@
         public string FullName { get; set; }
         public DateTime Birthday { get; set; }
         public string Location { get; set; }
+        public IFormFile Photo { get; set; }
 
         public int AccountId { get; set; }
         public string AccountEmail { get; set; }
