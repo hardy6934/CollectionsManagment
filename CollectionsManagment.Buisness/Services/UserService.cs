@@ -3,12 +3,7 @@ using CollectionsManagment.Abstractions.GenRepositoryAbstractions;
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.DataBase.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore; 
 
 namespace CollectionsManagment.Buisness.Services
 {
@@ -110,6 +105,19 @@ namespace CollectionsManagment.Buisness.Services
                 throw;
             } 
         }
+        
+        public async Task<UserDTO> GetUserByIdWithIncludsAsync(int id)
+        {
+            try
+            {
+                var user = await unitOfWork.Users.FindBy(us => us.Id.Equals(id), user => user.Account, us => us.Role).FirstOrDefaultAsync();
+                return mapper.Map<UserDTO>(user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<int> UpdateUserAsync(UserDTO dto)
         {
@@ -125,5 +133,6 @@ namespace CollectionsManagment.Buisness.Services
             
         }
          
+
     }
 }

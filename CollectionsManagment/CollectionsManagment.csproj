@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="dropzone" Version="4.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.7">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +30,10 @@
     <ProjectReference Include="..\CollectionsManagment.Core\CollectionsManagment.Core.csproj" />
     <ProjectReference Include="..\CollectionsManagment.DataBase\CollectionsManagment.DataBase.csproj" />
     <ProjectReference Include="..\CollectionsManagment.GenericRepository\CollectionsManagment.GenericRepository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
