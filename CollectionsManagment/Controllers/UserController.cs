@@ -33,8 +33,7 @@ namespace CollectionsManagment.Controllers
 
         [HttpPost]
         public async Task<IActionResult> EditUserAsync(UserModel model)
-        {
-              
+        { 
             if (model.Photo != null) {
                 string uploadsFolder = Path.Combine(webHostingEnvironment.WebRootPath, "images");
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
@@ -45,9 +44,7 @@ namespace CollectionsManagment.Controllers
             
             await userService.UpdateUserAsync(mapper.Map<UserDTO>(model));
             return RedirectToAction( "Index", "Home");
-        }
-
-         
+        } 
 
     }
 }

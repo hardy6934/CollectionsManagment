@@ -4,41 +4,43 @@
     ViewData["Title"] = "User";
     var photoPath = "~/Images/" + (Model.FilePath ?? "standartImageForUsersWithoutImage.png");
 }
-<div>
-    <h1>User</h1>
+<div class="container">
+    
 
-    <div style= "border:solid 1px; margin-bottom:20px " class ="vaccination-preview">
+    <div  class="row">
 
-         <div class="mb-3">
-            <input type="hidden" asp-for="Id" class="form-control" id="Id">
-        </div>
+        <div style="border:5px solid black; border-radius: 10px; margin-bottom:20px; margin:0 auto; text-align:center" class="col-5">
 
-        <div class="mb-3"> 
-            <img class="UsersPhoto" src="@photoPath" asp-append-version="true"/>
-        </div>
+            <div>
+                <input type="hidden" asp-for="Id" class="form-control" id="Id">
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="FullName" class="form-label">FullName</label><br />
-            <label asp-for = "FullName" class = "form-label">@Model.FullName</label> 
-        </div>
+            <div> 
+                <img class="UsersPhoto" src="@photoPath" asp-append-version="true"/>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="Birthday" class="form-label">Birthday</label><br />
-            <label asp-for="Birthday" class="form-label">@Model.Birthday.ToString("yyyy-MM-dd")</label> 
-        </div>
+            <div>
+                <label asp-for="FullName" class="form-label">FullName: </label>
+                <label asp-for = "FullName" class = "form-label">@Model.FullName</label> 
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="Location" class="form-label">Location</label><br />
-            <label asp-for="Location" class="form-label">@Model.Location</label>
-        </div>
+            <div>
+                <label asp-for="Birthday" class="form-label">Birthday: </label>
+                <label asp-for="Birthday" class="form-label">@Model.Birthday.ToString("yyyy-MM-dd")</label> 
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="AccountEmail" class="form-label">AccountEmail</label><br />
-            <label asp-for="AccountEmail" class="form-label">@Model.AccountEmail</label>
-        </div>
+            <div>
+                <label asp-for="Location" class="form-label">Location: </label>
+                <label asp-for="Location" class="form-label">@Model.Location</label>
+            </div>
+
+            <div>
+                <label asp-for="AccountEmail" class="form-label">AccountEmail: </label>
+                <label asp-for="AccountEmail" class="form-label">@Model.AccountEmail</label>
+            </div>
          
-       <a style="margin-bottom:5px" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="EditUser" asp-route-id = "@Model.Id" >Edit</a> <br /> 
-         
-          </div> 
+           <a style="margin-bottom:5px; width:150px" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="EditUser" asp-route-id = "@Model.Id" >Edit</a> <br /> 
+        </div>
+    </div> 
 
 </div>
