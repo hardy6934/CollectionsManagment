@@ -4,7 +4,8 @@ using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-  
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace CollectionsManagment.Controllers
 {
     [Authorize(Roles = "Admin,User")]
@@ -12,13 +13,15 @@ namespace CollectionsManagment.Controllers
     {
         private readonly IMapper mapper; 
         private readonly IUserService userService;
+        private readonly IRoleService roleService;
         private readonly IWebHostEnvironment webHostingEnvironment;
 
-        public UserController(IMapper mapper, IUserService userService, IWebHostEnvironment webHostingEnvironment)
+        public UserController(IMapper mapper, IUserService userService, IWebHostEnvironment webHostingEnvironment, IRoleService roleService)
         {
             this.mapper = mapper; 
             this.userService = userService;
             this.webHostingEnvironment = webHostingEnvironment;
+            this.roleService = roleService;
         }
         public async Task<IActionResult> UserViewAsync(int id)
         { 
@@ -60,10 +63,22 @@ namespace CollectionsManagment.Controllers
         
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> EditUserAsAdminAsync()
+        public async Task<IActionResult> EditUserAsAdminAsync(int id)
         {
-            var users = await userService.GetAllUsers();
-            return View(users.Select(x=>mapper.Map<UserModel>(x)).ToList());
+            var user = mapper.Map<UsersModelForUpdatingByAdmin>(await userService.GetUserByIdAsync(id));
+            var roles = await roleService.GetAllRolesAsync(); 
+            user.Roles = roles.Select(x => new SelectListItem(x.RoleName, x.Id.ToString())).ToList();
+
+            return View(user);
+        }
+        
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditUserAsAdminAsync(UsersModelForUpdatingByAdmin model)
+        {
+            var dto = mapper.Map<UserDTO>(model);
+            await userService.UpdateUserAsync(dto);
+            return RedirectToAction("Index", "Home");
         }
 
     }

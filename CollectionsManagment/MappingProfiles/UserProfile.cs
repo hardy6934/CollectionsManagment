@@ -16,6 +16,9 @@ namespace CollectionsManagment.MappingProfiles
             CreateMap<UserDTO, UserModel>();
             CreateMap<UserModel, UserDTO>();
 
+            CreateMap<UsersModelForUpdatingByAdmin, UserDTO>();
+            CreateMap<UserDTO, UsersModelForUpdatingByAdmin>();
+
             CreateMap<UserDTO, UserShortDataModel>();
         }
     }

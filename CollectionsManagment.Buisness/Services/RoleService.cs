@@ -20,6 +20,7 @@ namespace CollectionsManagment.Buisness.Services
         {
 
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
 
         }
 
@@ -39,9 +40,10 @@ namespace CollectionsManagment.Buisness.Services
 
         public async Task<List<RoleDTO>> GetAllRolesAsync()
         {
-            var dtos = await unitOfWork.Role.GetAllAsync();
+            var roles =  await unitOfWork.Role.GetAllAsync();
 
-            return dtos.Select(x => mapper.Map<RoleDTO>(x)).ToList();
+
+            return roles.Select(x=>mapper.Map<RoleDTO>(x)).ToList();
         }
     }
 }
