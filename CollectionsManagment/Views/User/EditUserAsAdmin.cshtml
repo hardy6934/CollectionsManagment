@@ -16,6 +16,10 @@
         </div>
 
         <div class="mb-3">
+            <input type="hidden" asp-for="FilePath" class="form-control" id="FilePath">
+        </div>
+
+        <div class="mb-3">
             <label asp-for="FullName" class="form-label">FullName</label><br />
             <input asp-for="FullName" type="text" class="form-control" id="FullName" required>
             <span asp-validation-for="FullName" class="text-danger"></span>
@@ -34,7 +38,7 @@
         </div>
         <div class="mb-3">
             <label asp-for="Photo" class="form-label">Photo</label><br />
-            <input type="file" asp-for="Photo" class="form-control" id="Photo" value="@photoPath">
+            <input type="file" asp-for="Photo" class="form-control" id="Photo"  >
             <span asp-validation-for="Photo" class="text-danger"></span>
         </div>
 

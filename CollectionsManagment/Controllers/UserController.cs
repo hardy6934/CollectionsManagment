@@ -32,7 +32,7 @@ namespace CollectionsManagment.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUserAsync(int id)
         {
-            var user = mapper.Map<UserModel>(await userService.GetUserByIdWithIncludsAsync(id));
+            var user = mapper.Map<UserModel>(await userService.GetUserByIdWithIncludsAsync(id)); 
             return View(user);
         }
 
@@ -45,7 +45,7 @@ namespace CollectionsManagment.Controllers
                 string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
                 model.Photo.CopyTo(new FileStream(FilePath, FileMode.Create));
                 model.FilePath = uniqueFileName;
-            }
+            } 
             
             await userService.UpdateUserAsync(mapper.Map<UserDTO>(model));
             return RedirectToAction( "Index", "Home");
