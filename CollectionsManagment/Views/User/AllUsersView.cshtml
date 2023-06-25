@@ -1,0 +1,54 @@
+﻿@model List<UserModel>
+
+@{
+    ViewData["Title"] = "User";
+    
+}
+<div class="container">
+
+ <div class="row" >
+@foreach(var n in Model){
+var photoPath = "~/Images/" + (n.FilePath ?? "standartImageForUsersWithoutImage.png");
+
+
+        <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:center" class="col-5">
+
+            <div>
+                <input type="hidden" asp-for="@n.Id" class="form-control" id="Id">
+            </div>
+
+            <div>
+                <img class="UsersPhoto" src="@photoPath" asp-append-version="true" />
+            </div>
+
+            <div>
+                    <label asp-for="@n.FullName" class="form-label">FullName: </label>
+                    <label asp-for="@n.FullName" class="form-label">@n.FullName</label>
+            </div>
+
+            <div>
+                    <label asp-for="@n.Birthday" class="form-label">Birthday: </label>
+                    <label asp-for="@n.Birthday" class="form-label">@n.Birthday.ToString("yyyy-MM-dd")</label>
+            </div>
+
+            <div>
+                    <label asp-for="@n.Location" class="form-label">Location: </label>
+                    <label asp-for="@n.Location" class="form-label">@n.Location</label>
+            </div>
+
+            <div>
+                    <label asp-for="@n.AccountEmail" class="form-label">AccountEmail: </label>
+                    <label asp-for="@n.AccountEmail" class="form-label">@n.AccountEmail</label>
+            </div>
+            <div>
+                    <label asp-for="@n.RoleName" class="form-label">RoleName: </label>
+                    <label asp-for="@n.RoleName" class="form-label">@n.RoleName</label>
+            </div>
+
+            <a style="margin-bottom:5px; width:150px" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="EditUserAsAdmin" asp-route-id="@n.Id">Edit</a> <br />
+        </div>
+
+        }
+    </div>
+
+</div>

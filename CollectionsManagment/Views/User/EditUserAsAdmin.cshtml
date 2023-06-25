@@ -8,40 +8,40 @@
     <h1>Update User</h1>
 
     <form asp-controller="User" asp-action="EditUser" method="post" enctype="multipart/form-data">
-         
 
-       <div class="mb-3">
+
+        <div class="mb-3">
             <input type="hidden" asp-for="Id" class="form-control" id="Id">
         </div>
 
         <div class="mb-3">
-            <label asp-for="FullName" class="form-label">FullName</label><br/>
+            <label asp-for="FullName" class="form-label">FullName</label><br />
             <input asp-for="FullName" type="text" class="form-control" id="FullName" required>
             <span asp-validation-for="FullName" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
-            <label asp-for="Birthday" class="form-label">Birthday</label><br/>
+            <label asp-for="Birthday" class="form-label">Birthday</label><br />
             <input type="date" asp-for="Birthday" class="form-control" id="Birthday" value=@DateTime.Now.ToString("yyyy-MM-dd")>
             <span asp-validation-for="Birthday" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
-            <label asp-for="Location" class="form-label">Location</label><br/>
+            <label asp-for="Location" class="form-label">Location</label><br />
             <input type="text" asp-for="Location" class="form-control" id="Location">
             <span asp-validation-for="Location" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="Photo" class="form-label">Photo</label><br/>
+            <label asp-for="Photo" class="form-label">Photo</label><br />
             <input type="file" asp-for="Photo" class="form-control" id="Photo">
             <span asp-validation-for="Photo" class="text-danger"></span>
         </div>
-        
+
         <div class="mb-3">
             <input type="hidden" asp-for="AccountId" class="form-control" id="AccountId">
         </div>
 
-            <div class="mb-3">
+        <div class="mb-3">
             <input type="hidden" asp-for="RoleId" class="form-control" id="RoleId">
         </div>
 
@@ -53,6 +53,6 @@
 
 @section Scripts
     {
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
      }

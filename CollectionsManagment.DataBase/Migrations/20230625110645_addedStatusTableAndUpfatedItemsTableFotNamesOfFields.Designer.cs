@@ -4,6 +4,7 @@ using CollectionsManagment.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollectionsManagment.DataBase.Migrations
 {
     [DbContext(typeof(CollectionsManagmentContext))]
-    partial class CollectionsManagmentContextModelSnapshot : ModelSnapshot
+    [Migration("20230625110645_addedStatusTableAndUpfatedItemsTableFotNamesOfFields")]
+    partial class addedStatusTableAndUpfatedItemsTableFotNamesOfFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,6 +250,23 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("StatusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Status");
+                });
+
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -275,6 +295,9 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId")
@@ -282,7 +305,9 @@ namespace CollectionsManagment.DataBase.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Collection", b =>
@@ -343,9 +368,17 @@ namespace CollectionsManagment.DataBase.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CollectionsManagment.DataBase.Entities.Status", "Status")
+                        .WithMany("Users")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Account");
 
                     b.Navigation("Role");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Account", b =>
@@ -367,6 +400,11 @@ namespace CollectionsManagment.DataBase.Migrations
                 });
 
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Status", b =>
                 {
                     b.Navigation("Users");
                 });

@@ -19,6 +19,7 @@ namespace CollectionsManagment.DataBase.Entities
 
         public int RoleId { get; set; }
         public Role Role { get; set; }
+         
 
         public List<Collection> Collections { get; set;}
     }

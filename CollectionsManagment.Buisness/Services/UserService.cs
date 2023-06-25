@@ -20,7 +20,7 @@ namespace CollectionsManagment.Buisness.Services
 
         }
 
-        public UserDTO CreateDefaultUser(int IdAccount, int IdRole)
+        public UserDTO CreateDefaultUser(int IdAccount, int IdRole )
         {
             try
             {
@@ -50,7 +50,7 @@ namespace CollectionsManagment.Buisness.Services
         {
             try
             {
-                var user = await unitOfWork.Users.FindBy(us => us.AccountId.Equals(Accountid), user => user.Account, us => us.Role).FirstOrDefaultAsync(); 
+                var user = await unitOfWork.Users.FindBy(us => us.AccountId.Equals(Accountid), user => user.Account, us => us.Role ).FirstOrDefaultAsync(); 
                 return mapper.Map<UserDTO>(user);
             }
             catch (Exception)

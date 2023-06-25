@@ -47,7 +47,7 @@ namespace CollectionsManagment
             //Dependency Injection Services 
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
-            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserService, UserService>(); 
 
 
             //Dependency Injection GenericRepository
@@ -57,7 +57,7 @@ namespace CollectionsManagment
             builder.Services.AddScoped<IRepository<Collection>, Repository<Collection>>();
             builder.Services.AddScoped<IRepository<Comment>, Repository<Comment>>();
             builder.Services.AddScoped<IRepository<Item>, Repository<Item>>();
-            builder.Services.AddScoped<IRepository<Like>, Repository<Like>>(); 
+            builder.Services.AddScoped<IRepository<Like>, Repository<Like>>();  
 
             //Dependency Injection UnitOfWork
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

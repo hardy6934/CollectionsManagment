@@ -16,13 +16,13 @@ namespace CollectionsManagment.Controllers
         private readonly IMapper mapper;
         private readonly IAccountService accountService;
         private readonly IUserService userService;
-        private readonly IRoleService roleService;
+        private readonly IRoleService roleService; 
 
-        public AccountController(IMapper mapper, IAccountService accountService, IUserService userService, IRoleService roleService) { 
+        public AccountController(IMapper mapper, IAccountService accountService, IUserService userService, IRoleService roleService ) { 
             this.mapper = mapper;
             this.accountService = accountService;
             this.userService = userService;
-            this.roleService = roleService;
+            this.roleService = roleService; 
         }
 
         [HttpGet]
@@ -55,8 +55,8 @@ namespace CollectionsManagment.Controllers
                         if (entity > 0)
                         {
                             var accountId = await accountService.GetIdAccountByEmailAsync(email);
-                            var IdRole = await roleService.FindRoleIdByRoleName("User");
-                            var defaultuser =   userService.CreateDefaultUser(accountId, IdRole);
+                            var IdRole = await roleService.FindRoleIdByRoleName("User"); 
+                            var defaultuser =   userService.CreateDefaultUser(accountId, IdRole );
                             var Userentity = await userService.CreateUserAsync(defaultuser);
 
                             if (Userentity > 0)
@@ -138,12 +138,13 @@ namespace CollectionsManagment.Controllers
                 var accountId = await accountService.GetIdAccountByEmailAsync(email);
 
                 var UserValuesWithIncludes = await userService.GetUsersByAccountId(accountId);
+             
 
                 var claims = new List<Claim>()
                 {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, UserValuesWithIncludes.AccountEmail),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, UserValuesWithIncludes.RoleName) };
-
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, UserValuesWithIncludes.RoleName)};
+             
                 if (claims != null)
                 {
                     var identity = new ClaimsIdentity(claims,

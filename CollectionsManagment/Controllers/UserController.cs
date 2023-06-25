@@ -2,10 +2,12 @@
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
   
 namespace CollectionsManagment.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class UserController : Controller
     {
         private readonly IMapper mapper; 
@@ -44,7 +46,25 @@ namespace CollectionsManagment.Controllers
             
             await userService.UpdateUserAsync(mapper.Map<UserDTO>(model));
             return RedirectToAction( "Index", "Home");
-        } 
+        }
+
+
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AllUsersViewAsync()
+        {
+            var users = await userService.GetAllUsers();
+            return View(users.Select(x=>mapper.Map<UserModel>(x)).ToList());
+        }
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditUserAsAdminAsync()
+        {
+            var users = await userService.GetAllUsers();
+            return View(users.Select(x=>mapper.Map<UserModel>(x)).ToList());
+        }
 
     }
 }

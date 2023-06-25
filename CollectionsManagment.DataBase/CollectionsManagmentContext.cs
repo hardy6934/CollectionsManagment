@@ -11,7 +11,7 @@ namespace CollectionsManagment.DataBase
         public DbSet<Item> Items { get; set; } 
         public DbSet<Like> Likes { get; set; } 
         public DbSet<Role> Roles { get; set; } 
-        public DbSet<User> Users { get; set; } 
+        public DbSet<User> Users { get; set; }  
 
         public CollectionsManagmentContext(DbContextOptions<CollectionsManagmentContext> options)
             : base(options)

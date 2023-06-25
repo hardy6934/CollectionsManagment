@@ -19,6 +19,7 @@ namespace CollectionsManagment.Core.DataTransferObjects
 
         public int RoleId { get; set; } 
         public string RoleName { get; set; }
+         
         public List<CollectionDTO>? CollectionsDTO { get; set; }
     }
 }

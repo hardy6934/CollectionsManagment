@@ -20,7 +20,7 @@ namespace CollectionsManagment.GenericRepository.GenRepository
         public IRepository<Item> Items { get; }
         public IRepository<Like> Likes { get; }
         public IRepository<Role> Role { get; }
-        public IRepository<User> Users { get; }
+        public IRepository<User> Users { get; } 
 
 
         public UnitOfWork(CollectionsManagmentContext context,
@@ -30,7 +30,7 @@ namespace CollectionsManagment.GenericRepository.GenRepository
             IRepository<Comment> comments,
             IRepository<Item> items,
             IRepository<Like> likes,
-            IRepository<Role> role)
+            IRepository<Role> role )
         {
             this.context = context;
             Users = users;
@@ -39,7 +39,7 @@ namespace CollectionsManagment.GenericRepository.GenRepository
             Likes = likes;
             Comments= comments;
             Items = items; 
-            Role= role;
+            Role= role; 
         } 
 
 
