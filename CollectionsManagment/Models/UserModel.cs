@@ -1,12 +1,16 @@
-﻿ 
+﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace CollectionsManagment.Models
 {
     public class UserModel
     {
         public int Id { get; set; }
+        [Required]
         public string FullName { get; set; }
-        public DateTime Birthday { get; set; }
-        public string? Location { get; set; }
+        [Required]
+        public DateTime Birthday { get; set; } 
+        public string? Location { get; set; } 
         public IFormFile? Photo { get; set; }
         public string? FilePath { get; set; }
 
