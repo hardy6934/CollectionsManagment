@@ -58,6 +58,7 @@ namespace CollectionsManagment
             builder.Services.AddScoped<IRepository<Comment>, Repository<Comment>>();
             builder.Services.AddScoped<IRepository<Item>, Repository<Item>>();
             builder.Services.AddScoped<IRepository<Like>, Repository<Like>>();  
+            builder.Services.AddScoped<IRepository<Tag>, Repository<Tag>>();  
 
             //Dependency Injection UnitOfWork
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

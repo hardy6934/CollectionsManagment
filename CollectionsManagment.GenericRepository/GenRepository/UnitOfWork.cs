@@ -21,6 +21,7 @@ namespace CollectionsManagment.GenericRepository.GenRepository
         public IRepository<Like> Likes { get; }
         public IRepository<Role> Role { get; }
         public IRepository<User> Users { get; } 
+        public IRepository<Tag> Tags { get; } 
 
 
         public UnitOfWork(CollectionsManagmentContext context,
@@ -30,7 +31,8 @@ namespace CollectionsManagment.GenericRepository.GenRepository
             IRepository<Comment> comments,
             IRepository<Item> items,
             IRepository<Like> likes,
-            IRepository<Role> role )
+            IRepository<Role> role, 
+            IRepository<Tag> tags )
         {
             this.context = context;
             Users = users;
@@ -40,6 +42,7 @@ namespace CollectionsManagment.GenericRepository.GenRepository
             Comments= comments;
             Items = items; 
             Role= role; 
+            Tags= tags; 
         } 
 
 

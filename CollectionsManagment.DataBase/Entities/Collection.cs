@@ -15,5 +15,6 @@ namespace CollectionsManagment.DataBase.Entities
         public User User { get; set; }
 
         public List<Item> Items { get; set;}
+        public List<Tag> Tags { get; set;}
     }
 }

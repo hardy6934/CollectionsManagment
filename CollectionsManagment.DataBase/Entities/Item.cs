@@ -9,8 +9,7 @@ namespace CollectionsManagment.DataBase.Entities
     public class Item : IBaseEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Tags { get; set; }
+        public string Name { get; set; } 
 
         public string? FirstNumericFieldName { get; set; }
         public int? FirstNumericField { get; set; }
