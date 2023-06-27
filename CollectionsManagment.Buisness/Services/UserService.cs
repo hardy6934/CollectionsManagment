@@ -71,28 +71,7 @@ namespace CollectionsManagment.Buisness.Services
                 throw;
             }
         }
-
-        public async Task<int> ChangeUserRoleByEmail(string email, string newRole)
-        {
-            try
-            {
-                var accountId = unitOfWork.Accounts.FindBy(ac => ac.Email.Equals(email)).FirstOrDefault().Id;
-                var user = await unitOfWork.Users.FindBy(us => us.AccountId.Equals(accountId)).FirstOrDefaultAsync();
-
-                var role = await unitOfWork.Role.FindBy(x=>x.RoleName.Equals(newRole)).AsNoTracking().FirstOrDefaultAsync();
-                if (role != null && user != null)
-                {
-                    user.RoleId = role.Id;
-                    unitOfWork.Users.Update(user);
-                    return await unitOfWork.Commit();
-                }
-                return 0;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
 
         public async Task<UserDTO> GetUserByIdAsync(int id)
         {

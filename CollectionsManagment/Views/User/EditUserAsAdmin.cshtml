@@ -8,12 +8,12 @@
 <div>
     <h1>Update User</h1>
 
-    <form asp-controller="User" asp-action="EditUser" method="post" enctype="multipart/form-data">
+    <form asp-controller="User" asp-action="EditUserAsAdmin" method="post" enctype="multipart/form-data">
 
 
         <div class="mb-3">
             <input type="hidden" asp-for="Id" class="form-control" id="Id">
-        </div>
+        </div> 
 
         <div class="mb-3">
             <input type="hidden" asp-for="FilePath" class="form-control" id="FilePath">
@@ -41,6 +41,8 @@
             <input type="file" asp-for="Photo" class="form-control" id="Photo"  >
             <span asp-validation-for="Photo" class="text-danger"></span>
         </div>
+
+        
 
         <select asp-for="RoleId" >
             

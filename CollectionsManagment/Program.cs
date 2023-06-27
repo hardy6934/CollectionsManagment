@@ -30,7 +30,7 @@ namespace CollectionsManagment
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>
                {
-                   options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                   options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
                    options.AccessDeniedPath = new PathString("/Account/Authentication");
                    options.LoginPath = new PathString("/Account/Authentication");
                });

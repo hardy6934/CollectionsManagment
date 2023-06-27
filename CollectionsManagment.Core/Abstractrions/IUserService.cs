@@ -15,8 +15,7 @@ namespace CollectionsManagment.Core.Abstractrions
         UserDTO CreateDefaultUser(int IdAccount, int IdRole );
         Task<UserDTO> GetUsersByAccountId(int AccountId);
         Task<List<UserDTO>> GetAllUsers();
-        Task<int> UpdateUserAsync(UserDTO dto);
-        Task<int> ChangeUserRoleByEmail(string email, string newRole);
+        Task<int> UpdateUserAsync(UserDTO dto); 
         Task<UserDTO> GetUserByIdWithIncludsAsync(int id);
     }
 }

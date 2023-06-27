@@ -1,0 +1,48 @@
+﻿@model UserModel
+
+@{
+    ViewData["Title"] = "User";
+    var photoPath = "~/Images/" + (Model.FilePath ?? "standartImageForUsersWithoutImage.png");
+}
+
+<form asp-controller="User" asp-action="DeleteUser" method="post">
+    <div class="container">
+     
+        <div class="row">
+
+            <div style="border:5px solid black; border-radius: 10px; margin-bottom:20px; margin:0 auto; text-align:center" class="col-5">
+
+                <div>
+                    <input type="hidden" asp-for="Id" class="form-control" id="Id">
+                </div> 
+
+                <div>
+                    <img class="UsersPhoto" src="@photoPath" asp-append-version="true" />
+                </div>
+
+                <div>
+                    <label asp-for="FullName" class="form-label">FullName: </label>
+                    <label asp-for="FullName" class="form-label">@Model.FullName</label>
+                </div>
+
+                <div>
+                    <label asp-for="Birthday" class="form-label">Birthday: </label>
+                    <label asp-for="Birthday" class="form-label">@Model.Birthday.ToString("yyyy-MM-dd")</label>
+                </div>
+
+                <div>
+                    <label asp-for="Location" class="form-label">Location: </label>
+                    <label asp-for="Location" class="form-label">@Model.Location</label>
+                </div>
+
+                <div>
+                    <label asp-for="AccountEmail" class="form-label">AccountEmail: </label>
+                    <label asp-for="AccountEmail" class="form-label">@Model.AccountEmail</label>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </div>
+
+    </div>
+</form>

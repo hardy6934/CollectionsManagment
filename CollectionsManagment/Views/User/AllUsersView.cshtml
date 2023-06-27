@@ -45,7 +45,8 @@ var photoPath = "~/Images/" + (n.FilePath ?? "standartImageForUsersWithoutImage.
                     <label asp-for="@n.RoleName" class="form-label">@n.RoleName</label>
             </div>
 
-            <a style="margin-bottom:5px; width:150px" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="EditUserAsAdmin" asp-route-id="@n.Id">Edit</a> <br />
+            <a style="margin-bottom:5px; width:150px" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="EditUserAsAdmin" asp-route-id="@n.Id">Edit</a> 
+            <a style="margin-bottom:5px; width:150px" class="btn btn-primary" asp-area="" asp-controller="User" asp-action="DeleteUser" asp-route-id="@n.Id">Remove</a> <br />
         </div>
 
         }
