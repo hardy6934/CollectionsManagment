@@ -49,6 +49,8 @@ namespace CollectionsManagment.DataBase.Entities
         public List<Like> Likes { get; set; }
         public List<Comment> Comments { get; set; }
 
+        public List<Tag> Tags { get; set; }
+
         public int CollectionId { get; set; }
         public Collection Collection { get; set; }
     }

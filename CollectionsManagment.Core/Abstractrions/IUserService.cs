@@ -16,6 +16,6 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<UserDTO> GetUsersByAccountId(int AccountId);
         Task<List<UserDTO>> GetAllUsers();
         Task<int> UpdateUserAsync(UserDTO dto); 
-        Task<UserDTO> GetUserByIdWithIncludsAsync(int id);
+        Task<UserDTO> GetUserByIdWithIncludsAsync(int id); 
     }
 }

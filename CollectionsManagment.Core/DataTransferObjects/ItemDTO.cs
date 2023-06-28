@@ -33,7 +33,10 @@ namespace CollectionsManagment.Core.DataTransferObjects
 
         public List<LikeDTO> LikesDTO { get; set; }
         public List<CommentDTO> CommentsDTO { get; set; }
+        public List<TagDTO> TagDTO { get; set; }
 
         public int CollectionId { get; set; } 
+        public string CollectionName { get; set; }
+
     }
 }

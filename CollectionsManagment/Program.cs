@@ -6,6 +6,7 @@ using CollectionsManagment.DataBase.Entities;
 using CollectionsManagment.GenericRepository.GenRepository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.WindowsAzure.Storage;
 using Serilog;
 using Serilog.Events;
 using System.Numerics;
@@ -48,6 +49,7 @@ namespace CollectionsManagment
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IUserService, UserService>(); 
+            builder.Services.AddScoped<ICollectionService, CollectionService>(); 
 
 
             //Dependency Injection GenericRepository
@@ -62,6 +64,25 @@ namespace CollectionsManagment
 
             //Dependency Injection UnitOfWork
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+            ////ДЛЯ ХРАНЕНИЯ ФОТОГРАФИЙ В AZURE
+            //// Добавление конфигурации
+            //var configuration = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json")
+            //    .Build();
+
+            //// Получение строки подключения к Azure Blob Storage
+            //var storageConnectionString = configuration.GetConnectionString("AzureBlobStorage");
+
+            //// Создание клиента Blob Storage
+            //var storageAccount = CloudStorageAccount.Parse(storageConnectionString);
+            //var blobClient = storageAccount.CreateCloudBlobClient();
+
+            //// Регистрация клиента Blob Storage в качестве сервиса
+            //builder.Services.AddSingleton(blobClient);
+
 
             var app = builder.Build();
 

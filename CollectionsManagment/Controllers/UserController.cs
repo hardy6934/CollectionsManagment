@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace CollectionsManagment.Controllers
 {
@@ -18,14 +19,16 @@ namespace CollectionsManagment.Controllers
         private readonly IAccountService accountService;
         private readonly IRoleService roleService;
         private readonly IWebHostEnvironment webHostingEnvironment;
+        private readonly CloudBlobClient blobClient;
 
-        public UserController(IMapper mapper, IUserService userService, IWebHostEnvironment webHostingEnvironment, IRoleService roleService, IAccountService accountService)
+        public UserController(IMapper mapper, IUserService userService, IWebHostEnvironment webHostingEnvironment, IRoleService roleService, IAccountService accountService, CloudBlobClient blobClient)
         {
             this.mapper = mapper; 
             this.userService = userService;
             this.accountService = accountService;
             this.webHostingEnvironment = webHostingEnvironment;
             this.roleService = roleService;
+            this.blobClient = blobClient;
         }
         public async Task<IActionResult> UserViewAsync(int id)
         {
@@ -44,21 +47,54 @@ namespace CollectionsManagment.Controllers
 
         [HttpPost]
         public async Task<IActionResult> EditUserAsync(UserModel model)
-        { 
-            if (model.Photo != null) {
+        {
+            if (model.Photo != null)
+            {
                 string uploadsFolder = Path.Combine(webHostingEnvironment.WebRootPath, "images");
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
                 string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
                 model.Photo.CopyTo(new FileStream(FilePath, FileMode.Create));
                 model.FilePath = uniqueFileName;
-            } 
-            
+            }
+
             await userService.UpdateUserAsync(mapper.Map<UserDTO>(model));
-            return RedirectToAction( "Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> EditUserAsync(UserModel model)
+        //{
+        //    if (model.Photo != null && model.Photo.Length > 0)
+        //    {
+        //        // Создание контейнера Blob
+        //        var container = blobClient.GetContainerReference("user-photos");
+        //        await container.CreateIfNotExistsAsync();
+        //        await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 
-        
+        //        // Генерация уникального имени файла
+        //        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Photo.FileName);
+
+        //        // Получение ссылки на Blob
+        //        var blob = container.GetBlockBlobReference(fileName);
+
+        //        // Загрузка фотографии в Blob Storage
+        //        using (var stream = model.Photo.OpenReadStream())
+        //        {
+        //            await blob.UploadFromStreamAsync(stream);
+        //        }
+
+        //        // Возвращение ссылки на загруженную фотографию
+        //        var photoUrl = blob.Uri.ToString();
+        //        var userDTO = mapper.Map<UserDTO>(model);
+        //        userDTO.FilePath= photoUrl;
+        //        await userService.UpdateUserAsync(userDTO);
+        //        return RedirectToAction("Index", "Home");
+        //    }
+
+        //    return BadRequest();
+        //} 
+
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AllUsersViewAsync()
