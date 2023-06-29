@@ -1,5 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CollectionModel
+
 @{
+    ViewData["Title"] = "Drop Collection";
+
 }
+<h3>Remove Collection</h3>
+
+<div class="container">
+
+    <div class="row">
+        <form asp-controller="Collection" asp-action="DeleteCollection" method="post">
+
+            <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:center" class="col-5">
+
+                <div style ="margin:0px 10px">
+                    <label for="name" class="form-label">Collection name: </label>
+                    <label asp-for="CollectionName" class="form-label">@Model.CollectionName</label>  
+                </div>
+
+                <div style="margin:0px 10px">
+                    <label for="description" class="form-label">Description: </label>
+                    <label asp-for="Description" class="form-label">@Model.Description</label>
+                </div>
+                  
+                <input type="submit" class="btn btn-primary" value="Submit">
+                
+            </div>
+             
+        </form>
+    </div>
+</div>

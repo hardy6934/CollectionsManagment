@@ -9,7 +9,7 @@ namespace CollectionsManagment.Core.Abstractrions
 {
     public interface ICollectionService
     {
-        Task<CollectionDTO> GetCollectionById(int id); 
+        Task<CollectionDTO> GetCollectionByIdAsync(int id); 
         Task<int> CreateCollectionAsync(CollectionDTO dto);  
         Task<List<CollectionDTO>> GetAllCollectionsAsync();
         Task<int> UpdateCollectionAsync(CollectionDTO dto);

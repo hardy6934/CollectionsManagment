@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CollectionsManagment.Core.Abstractrions;
+using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,13 +23,44 @@ namespace CollectionsManagment.Controllers
             this.accountService = accountService;
         }
 
-        public async Task<ActionResult> CollectionViewAsync()
+        public async Task<IActionResult> CollectionViewAsync()
         { 
             var accountId = await accountService.GetIdAccountByEmailAsync(User.Identity.Name);
             var user = await userService.GetUsersByAccountId(accountId);
             var models = await collectionService.GetAllCollectionsForUserAsync(user.Id);
             return View(models.Select(x=>mapper.Map<CollectionModel>(x)).ToList());
         }
- 
+
+        [HttpGet]
+        public async Task<IActionResult> AddCollectionAsync()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> AddCollectionAsync(CollectionModel model)
+        {
+            var accountId = await accountService.GetIdAccountByEmailAsync(User.Identity.Name);
+            var user = await userService.GetUsersByAccountId(accountId);
+            model.UserId = user.Id;
+            await collectionService.CreateCollectionAsync(mapper.Map<CollectionDTO>(model));
+            return RedirectToAction("CollectionView");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCollectionAsync(int Id)
+        {
+            var collection = await collectionService.GetCollectionByIdAsync(Id);
+            return View(mapper.Map<CollectionModel>(collection));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCollectionAsync(CollectionModel model)
+        {
+             
+            await collectionService.DeleteCollectionAsync(mapper.Map<CollectionDTO>(model));
+            return RedirectToAction("CollectionView");
+        }
+
     }
 }

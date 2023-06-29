@@ -2,12 +2,10 @@
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.DataBase.Entities;
-using CollectionsManagment.Models;
-using Microsoft.AspNetCore.Authentication;
+using CollectionsManagment.Models; 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.AspNetCore.Mvc.Rendering; 
 
 namespace CollectionsManagment.Controllers
 {
@@ -18,17 +16,15 @@ namespace CollectionsManagment.Controllers
         private readonly IUserService userService;
         private readonly IAccountService accountService;
         private readonly IRoleService roleService;
-        private readonly IWebHostEnvironment webHostingEnvironment;
-        private readonly CloudBlobClient blobClient;
+        private readonly IWebHostEnvironment webHostingEnvironment; 
 
-        public UserController(IMapper mapper, IUserService userService, IWebHostEnvironment webHostingEnvironment, IRoleService roleService, IAccountService accountService, CloudBlobClient blobClient)
+        public UserController(IMapper mapper, IUserService userService, IWebHostEnvironment webHostingEnvironment, IRoleService roleService, IAccountService accountService )
         {
             this.mapper = mapper; 
             this.userService = userService;
             this.accountService = accountService;
             this.webHostingEnvironment = webHostingEnvironment;
-            this.roleService = roleService;
-            this.blobClient = blobClient;
+            this.roleService = roleService; 
         }
         public async Task<IActionResult> UserViewAsync(int id)
         {

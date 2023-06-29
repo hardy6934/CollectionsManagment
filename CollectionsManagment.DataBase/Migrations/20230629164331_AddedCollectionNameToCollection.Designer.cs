@@ -4,6 +4,7 @@ using CollectionsManagment.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollectionsManagment.DataBase.Migrations
 {
     [DbContext(typeof(CollectionsManagmentContext))]
-    partial class CollectionsManagmentContextModelSnapshot : ModelSnapshot
+    [Migration("20230629164331_AddedCollectionNameToCollection")]
+    partial class AddedCollectionNameToCollection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

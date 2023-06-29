@@ -35,7 +35,7 @@ namespace CollectionsManagment.Buisness.Services
             return dtos.Select(x=>mapper.Map<CollectionDTO>(x)).ToList();
         }
 
-        public async Task<CollectionDTO> GetCollectionById(int id)
+        public async Task<CollectionDTO> GetCollectionByIdAsync(int id)
         {
             var dto = await unitOfWork.Collections.GetByIdAsync(id);
             return mapper.Map<CollectionDTO>(dto);
