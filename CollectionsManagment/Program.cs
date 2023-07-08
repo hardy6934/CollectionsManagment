@@ -50,6 +50,7 @@ namespace CollectionsManagment
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IUserService, UserService>(); 
             builder.Services.AddScoped<ICollectionService, CollectionService>(); 
+            builder.Services.AddScoped<IItemService, ItemService>(); 
 
 
             //Dependency Injection GenericRepository

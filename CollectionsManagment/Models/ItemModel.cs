@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CollectionsManagment.Core.DataTransferObjects;
 
-namespace CollectionsManagment.Core.DataTransferObjects
+namespace CollectionsManagment.Models
 {
-    public class ItemDTO
+    public class ItemModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -39,11 +35,51 @@ namespace CollectionsManagment.Core.DataTransferObjects
         public string? ThirdDatetimeFieldName { get; set; }
         public DateTime? ThirdDatetimeField { get; set; }
 
-        public string? FirstBoolFieldName { get; set; }
+        public string? FirstBoolFieldName { get ; set; } 
+
+        public string StringForFirstBoolField
+        {
+            get {
+                return "";
+            }
+            set {
+                if (value != null)
+                FirstBoolField = Convert.ToBoolean(value);
+                else FirstBoolField= null;
+            }
+        }
         public bool? FirstBoolField { get; set; }
         public string? SecondBoolFieldName { get; set; }
+
+        public string StringForSecondBoolField
+        {
+            get
+            {
+                return "";
+            }
+            set
+            {
+                if (value != null)
+                    SecondBoolField = Convert.ToBoolean(value);
+                else SecondBoolField = null;
+            }
+        }
         public bool? SecondBoolField { get; set; }
         public string? ThirdtBoolFieldName { get; set; }
+
+        public string StringForThirdBoolField
+        {
+            get
+            {
+                return "";
+            }
+            set
+            {
+                if (value != null)
+                    ThirdtBoolField = Convert.ToBoolean(value);
+                else ThirdtBoolField = null;
+            }
+        }
         public bool? ThirdtBoolField { get; set; }
 
         public List<LikeDTO> LikesDTO { get; set; }
@@ -53,6 +89,5 @@ namespace CollectionsManagment.Core.DataTransferObjects
 
         public int CollectionId { get; set; }
         public CollectionDTO CollectionDTO { get; set; }
-
     }
 }

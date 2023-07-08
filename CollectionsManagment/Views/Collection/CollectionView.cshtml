@@ -30,7 +30,9 @@
                 </div>
 
                   
-                <a style="margin-bottom:5px; width:150px" class="btn btn-primary" asp-area="" asp-controller="Collection" asp-action="DeleteCollection" asp-route-id="@n.Id">Delete</a> <br />
+                <a style="margin-bottom:5px; width:250px" class="btn btn-primary" asp-area="" asp-controller="Collection" asp-action="DeleteCollection" asp-route-id="@n.Id">Delete</a> 
+                <a style="margin-bottom:5px; width:250px" class="btn btn-primary" asp-area="" asp-controller="Item" asp-action="AddItem" asp-route-id="@n.Id">Add collection's item</a> <br />
+                <a style="margin-bottom:5px; width:250px" class="btn btn-primary" asp-area="" asp-controller="Item" asp-action="ItemsView" asp-route-id="@n.Id">Items View</a> <br />
             </div>
 
         }

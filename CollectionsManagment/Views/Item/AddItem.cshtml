@@ -1,0 +1,114 @@
+﻿@model ItemModel
+
+@{
+    ViewData["Title"] = "Item";
+
+} 
+<form asp-controller="Item" asp-action="AddItem" method="post">
+
+    <div class="container">
+
+        <div class="row"> 
+
+                <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:center" class="col-5">
+
+                    <div>
+                        <input type="hidden" asp-for="Id" value="0" class="form-control">
+                    </div>
+
+                    <div>
+                        <input type="hidden" asp-for="CollectionId" value="@ViewBag.CollectionId" class="form-control">
+                    </div> 
+
+                    <div>
+                            <label asp-for="Name" class="form-label">Item name: </label>
+                            <input type="text" asp-for="Name" class="form-control" required>
+                    </div> 
+                     
+
+                    <div style="background-color:red; height:30px; width:70px;" id="addNumeric">
+                        Numerical field
+                    </div>
+
+                    <div id="firstNum">
+                    </div>
+
+                    <div id="SecondNum">
+                    </div>
+
+                    <div id="ThirdNum">
+                    </div>
+                     
+                    <div style="background-color:red; height:30px; width:70px;" id="addStirng">
+                        String
+                    </div>
+
+                    <div id="firstString">
+                    </div>
+
+                    <div id="SecondString">
+                    </div>
+
+                    <div id="ThirdString">
+                    </div>
+
+
+
+                    <div style="background-color:red; height:30px; width:70px;" id="addBigStirng">
+                        BigString
+                    </div>
+
+                    <div id="firstBigString">
+                    </div>
+
+                    <div id="SecondBigString">
+                    </div>
+
+                    <div id="ThirdBigString">
+                    </div>
+                     
+
+                    <div style="background-color:red; height:30px; width:70px;" id="addDateTime">
+                        datetime
+                    </div>
+
+                    <div id="firstDateTime">
+                    </div>
+
+                    <div id="SecondDateTime">
+                    </div>
+
+                    <div id="ThirdDateTime">
+                    </div>
+                     
+
+
+
+                    <div style="background-color:red; height:30px; width:70px;" id="addCheckBox">
+                        checkbox
+                    </div> 
+                     <div id="firstBool">
+
+                     </div>
+                     <div id="SecondBool">
+
+                     </div>
+                     <div id="ThirdBool">
+
+                     </div>
+
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div> 
+        </div>
+
+    </div>
+</form>
+
+ 
+<script src="~/js/InitDateTimeField.js" asp-append-version="true"></script>
+<script src="~/js/InitCheckBoxField.js" asp-append-version="true"></script>
+<script src="~/js/InitBigStringField.js" asp-append-version="true"></script>
+<script src="~/js/InitStringField.js" asp-append-version="true"></script>
+<script src="~/js/InitNumField.js" asp-append-version="true"></script>
+ 
+                      

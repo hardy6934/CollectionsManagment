@@ -20,7 +20,7 @@ namespace CollectionsManagment.Controllers
             this.mapper = mapper;
             this.collectionService = collectionService; 
             this.userService = userService;
-            this.accountService = accountService;
+            this.accountService = accountService; 
         }
 
         public async Task<IActionResult> CollectionViewAsync()
@@ -61,6 +61,7 @@ namespace CollectionsManagment.Controllers
             await collectionService.DeleteCollectionAsync(mapper.Map<CollectionDTO>(model));
             return RedirectToAction("CollectionView");
         }
-
+        
+       
     }
 }
