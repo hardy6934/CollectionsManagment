@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CollectionsManagment.Abstractions.GenRepositoryAbstractions;
+using CollectionsManagment.Buisness.Services;
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
@@ -11,11 +12,13 @@ namespace CollectionsManagment.Controllers
     {
         private readonly IMapper mapper;
         private readonly IItemService itemService; 
+        private readonly ICollectionService collectionService; 
          
-        public ItemController(IItemService itemService, IMapper mapper )
+        public ItemController(IItemService itemService, IMapper mapper, ICollectionService collectionService )
         {
             this.itemService = itemService;
-            this.mapper = mapper; 
+            this.mapper = mapper;
+            this.collectionService = collectionService;
 
         }
          
@@ -26,10 +29,19 @@ namespace CollectionsManagment.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddItem(int id)
+        public async Task<IActionResult> AddItemAsync(int id)
         {
-            ViewBag.CollectionId = id;
-            return View();
+            if (await itemService.IsCollectionEmpty(id))
+            {
+                ViewBag.CollectionId = id;
+                return View();
+            }
+            else
+            {
+                ViewBag.CollectionId = id;
+                return View("AddItemToNotEmptyColl");
+            }
+            
         }
         
         [HttpPost]
@@ -37,6 +49,21 @@ namespace CollectionsManagment.Controllers
         {
             await itemService.CreateItemAsync(mapper.Map<ItemDTO>(model));
             return RedirectToAction("CollectionView","Collection");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveItemAsync(int id)
+        {
+            var itemModel = await itemService.GetItemById(id);
+            return View(mapper.Map<ItemModel>(itemModel));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveItemAsync(ItemModel model)
+        {
+            await itemService.DeleteItemAsync(mapper.Map<ItemDTO>(model));
+            return RedirectToAction("CollectionView", "Collection");
         }
 
     }

@@ -14,5 +14,6 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<int> UpdateItemAsync(ItemDTO dto);
         Task<int> DeleteItemAsync(ItemDTO dto); 
         Task<ItemDTO> GetItemById(int id);
+        Task<bool> IsCollectionEmpty(int collectionId);
     }
 }

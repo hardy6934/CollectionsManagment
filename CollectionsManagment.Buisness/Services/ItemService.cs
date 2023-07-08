@@ -46,5 +46,12 @@ namespace CollectionsManagment.Buisness.Services
             unitOfWork.Items.Update(mapper.Map<Item>(dto));
             return await unitOfWork.Commit();
         }
+
+        public async Task<bool> IsCollectionEmpty(int collectionId)
+        {
+            var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstAsync();
+            return collection.Items.Any();
+
+        }
     }
 }
