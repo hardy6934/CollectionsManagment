@@ -1,5 +1,155 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ItemModel
+
 @{
+    ViewData["Title"] = "Item";
+
 }
+<form asp-controller="Item" asp-action="AddItem" method="post">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:center" class="col-5">
+
+                <div>
+                    <input type="hidden" asp-for="Id" value="0" class="form-control">
+                </div>
+
+                <div>
+                    <input type="hidden" asp-for="CollectionId" value="@ViewBag.CollectionId" class="form-control">
+                </div>
+
+                <div>
+                    <label asp-for="Name" class="form-label">Item name: </label>
+                    <input type="text" asp-for="Name" class="form-control" value = "" required>
+                </div>
+
+                @if(@Model.FirstNumericFieldName != null)
+                {
+                    <div>
+                        <label asp-for="FirstNumericFieldName" class="form-label">@Model.FirstNumericFieldName</label>
+                        <input type="number" asp-for="FirstNumericField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.SecondNumericFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="SecondNumericFieldName" class="form-label">@Model.SecondNumericFieldName</label>
+                        <input type="number" asp-for="SecondNumericField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.ThirdNumericFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="ThirdNumericFieldName" class="form-label">@Model.ThirdNumericFieldName</label>
+                        <input type="number" asp-for="ThirdNumericField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.FirstBigStringFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="FirstBigStringFieldName" class="form-label">@Model.FirstBigStringFieldName</label>
+                        <textarea name="FirstBigStringField" class="form-control" required></textarea>
+                    </div>
+                }
+
+                @if(Model.SecondBigStringFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="SecondBigStringFieldName" class="form-label">@Model.SecondBigStringFieldName</label>
+                        <textarea name="SecondBigStringField" class="form-control" required></textarea>
+                    </div>
+                }
+                 
+                @if(Model.ThirdStringFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="ThirdStringFieldName" class="form-label">@Model.ThirdStringFieldName</label>
+                        <textarea name="ThirdStringField" class="form-control" required></textarea>
+                    </div>
+                }
+
+                @if(Model.FirstStringFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="FirstStringFieldName" class="form-label">@Model.FirstStringFieldName</label>
+                        <input type="text" asp-for="FirstStringField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.SecondStringFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="SecondStringFieldName" class="form-label">@Model.SecondStringFieldName</label>
+                        <input type="text" asp-for="SecondStringField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.ThirdBigStringFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="ThirdStringFieldName" class="form-label">@Model.ThirdStringFieldName</label>
+                        <input type="text" asp-for="ThirdStringField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.FirstDatetimeFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="FirstDatetimeFieldName" class="form-label">@Model.FirstDatetimeFieldName</label>
+                        <input type="datetime-local" asp-for="FirstDatetimeField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.SecondDatetimeFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="SecondDatetimeFieldName" class="form-label">@Model.SecondDatetimeFieldName</label>
+                        <input type="datetime-local" asp-for="SecondDatetimeField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.ThirdDatetimeFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="ThirdDatetimeFieldName" class="form-label">@Model.ThirdDatetimeFieldName</label>
+                        <input type="datetime-local" asp-for="ThirdDatetimeField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.FirstBoolFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="FirstBoolFieldName" class="form-label">@Model.FirstBoolFieldName</label>
+                        <input type="checkbox" asp-for="FirstBoolField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.SecondBoolFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="SecondBoolFieldName" class="form-label">@Model.SecondBoolFieldName</label>
+                        <input type="checkbox" asp-for="SecondBoolField" class="form-control" value="" required>
+                    </div>
+                }
+
+                @if(Model.ThirdtBoolFieldName !=null)
+                {
+                    <div>
+                        <label asp-for="ThirdtBoolFieldName" class="form-label">@Model.ThirdtBoolFieldName</label>
+                        <input type="checkbox" asp-for="ThirdtBoolField" class="form-control" value="" required>
+                    </div>
+                }
+                 
+
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </div>
+
+    </div>
+</form>
+ 

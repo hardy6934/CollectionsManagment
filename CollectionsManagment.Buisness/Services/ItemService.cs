@@ -49,9 +49,13 @@ namespace CollectionsManagment.Buisness.Services
 
         public async Task<bool> IsCollectionEmpty(int collectionId)
         {
-            var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstAsync();
-            return collection.Items.Any();
-
+            var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
+            return collection.Items.Any(); 
+        }
+        public async Task<ItemDTO> GetFirstItemFromCollectionByCollectionId(int collectionId)
+        {
+            var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
+            return mapper.Map<ItemDTO>(collection.Items.FirstOrDefault()); 
         }
     }
 }

@@ -31,7 +31,7 @@ namespace CollectionsManagment.Controllers
         [HttpGet]
         public async Task<IActionResult> AddItemAsync(int id)
         {
-            if (await itemService.IsCollectionEmpty(id))
+            if (!await itemService.IsCollectionEmpty(id))
             {
                 ViewBag.CollectionId = id;
                 return View();
@@ -39,7 +39,8 @@ namespace CollectionsManagment.Controllers
             else
             {
                 ViewBag.CollectionId = id;
-                return View("AddItemToNotEmptyColl");
+                var firstItem = await itemService.GetFirstItemFromCollectionByCollectionId(id);
+                return View("AddItemToNotEmptyColl", mapper.Map<ItemModel>(firstItem));
             }
             
         }
