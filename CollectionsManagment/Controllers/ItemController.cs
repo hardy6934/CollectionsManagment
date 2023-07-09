@@ -4,10 +4,12 @@ using CollectionsManagment.Buisness.Services;
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollectionsManagment.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class ItemController : Controller
     {
         private readonly IMapper mapper;
@@ -66,6 +68,15 @@ namespace CollectionsManagment.Controllers
             await itemService.DeleteItemAsync(mapper.Map<ItemDTO>(model));
             return RedirectToAction("CollectionView", "Collection");
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ItemsViewForAnonymousAsync(int id)
+        {
+            var items = await itemService.GetItemsByCollectionIdAsync(id);
+            return View(items.Select(x => mapper.Map<ItemModel>(x)).ToList());
+        }
+        
 
     }
 }

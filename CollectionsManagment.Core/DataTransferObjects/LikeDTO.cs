@@ -10,7 +10,8 @@ namespace CollectionsManagment.Core.DataTransferObjects
     {
         public int Id { get; set; }
         public int SenderId { get; set; }
-
+        public string SenderName { get; set; }
+         
         public int ItemId { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<int> UpdateCollectionAsync(CollectionDTO dto);
         Task<int> DeleteCollectionAsync(CollectionDTO dto);
         Task<CollectionDTO> GetCollectionByIdWithIncludsAsync(int id);
-        Task<List<CollectionDTO>> GetAllCollectionsForUserAsync(int id);
+        Task<List<CollectionDTO>> GetAllCollectionsForUserAsync(int id); 
     }
 }

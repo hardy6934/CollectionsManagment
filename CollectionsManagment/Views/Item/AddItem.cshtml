@@ -10,7 +10,7 @@
 
         <div class="row"> 
 
-                <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:center" class="col-5">
+                <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:left" class="col-5">
 
                     <div>
                         <input type="hidden" asp-for="Id" value="0" class="form-control">
@@ -20,16 +20,17 @@
                         <input type="hidden" asp-for="CollectionId" value="@ViewBag.CollectionId" class="form-control">
                     </div> 
 
-                    <div>
+                    <div style="margin-bottom:5px">
                             <label asp-for="Name" class="form-label">Item name: </label>
                             <input type="text" asp-for="Name" class="form-control" required>
                     </div> 
                      
 
-                    <div style="background-color:red; height:30px; width:70px;" id="addNumeric">
+                    @*<div style="background-color:red; height:30px; width:70px;" id="addNumeric">
                         Numerical field
-                    </div>
-
+                    </div>*@
+                    <button type="button" class="btn btn-secondary" id="addNumeric"> Add Numerical field</button>
+                 
                     <div id="firstNum">
                     </div>
 
@@ -39,9 +40,10 @@
                     <div id="ThirdNum">
                     </div>
                      
-                    <div style="background-color:red; height:30px; width:70px;" id="addStirng">
+                    @*<div style="background-color:red; height:30px; width:70px;" id="addStirng">
                         String
-                    </div>
+                    </div>*@
+                    <button type="button" class="btn btn-secondary" id="addStirng"> Add String field</button>
 
                     <div id="firstString">
                     </div>
@@ -54,9 +56,10 @@
 
 
 
-                    <div style="background-color:red; height:30px; width:70px;" id="addBigStirng">
+                    @*<div style="background-color:red; height:30px; width:70px;" id="addBigStirng">
                         BigString
-                    </div>
+                    </div>*@
+                    <button type="button" class="btn btn-secondary" id="addBigStirng"> Add BigString field</button>
 
                     <div id="firstBigString">
                     </div>
@@ -68,9 +71,10 @@
                     </div>
                      
 
-                    <div style="background-color:red; height:30px; width:70px;" id="addDateTime">
+                    @*<div style="background-color:red; height:30px; width:70px;" id="addDateTime">
                         datetime
-                    </div>
+                    </div>*@
+                    <button type="button" class="btn btn-secondary" id="addDateTime"> Add datetime field</button>
 
                     <div id="firstDateTime">
                     </div>
@@ -84,20 +88,21 @@
 
 
 
-                    <div style="background-color:red; height:30px; width:70px;" id="addCheckBox">
+                    @*<div style="background-color:red; height:30px; width:70px;" id="addCheckBox">
                         checkbox
-                    </div> 
-                     <div id="firstBool">
+                    </div>*@
+                    <button type="button" class="btn btn-secondary" id="addCheckBox"> Add checkbox</button>
+                    <div id="firstBool">
 
-                     </div>
-                     <div id="SecondBool">
+                    </div>
+                    <div id="SecondBool">
 
-                     </div>
-                     <div id="ThirdBool">
+                    </div>
+                    <div id="ThirdBool">
 
-                     </div>
+                    </div>
 
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Submit"><br />
             </div> 
         </div>
 
@@ -111,4 +116,9 @@
 <script src="~/js/InitStringField.js" asp-append-version="true"></script>
 <script src="~/js/InitNumField.js" asp-append-version="true"></script>
  
-                      
+ <style>
+    div button{
+        margin:5px 0px 5px 0px;
+    }
+    
+ </style>

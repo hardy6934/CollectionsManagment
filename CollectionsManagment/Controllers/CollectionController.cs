@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Internal.Mappers;
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
@@ -61,7 +62,16 @@ namespace CollectionsManagment.Controllers
             await collectionService.DeleteCollectionAsync(mapper.Map<CollectionDTO>(model));
             return RedirectToAction("CollectionView");
         }
-        
-       
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllCollections()
+        {
+            var collections = await collectionService.GetAllCollectionsAsync();
+            return View(collections.Select(x=>mapper.Map<CollectionModel>(x)).ToList());
+        }
+
+
     }
 }

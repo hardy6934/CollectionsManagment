@@ -57,5 +57,8 @@ namespace CollectionsManagment.Buisness.Services
             var dtos = await unitOfWork.Collections.Get().Select(x=>x).Where(x=>x.UserId.Equals(id)).ToListAsync();
             return dtos.Select(x=>mapper.Map<CollectionDTO>(x)).ToList();
         }
+
+
+         
     }
 }
