@@ -76,7 +76,16 @@ namespace CollectionsManagment.Controllers
             var items = await itemService.GetItemsByCollectionIdAsync(id);
             return View(items.Select(x => mapper.Map<ItemModel>(x)).ToList());
         }
-        
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetItemById(int id)
+        {
+            //var itemModel = await itemService.GetItemById(id);
+            var itemModel = await itemService.GetItemByIdWithCommentsAndUsers(id);
+            return View("ConcretItemView", mapper.Map<ItemModel>(itemModel));
+        }
+
 
     }
 }

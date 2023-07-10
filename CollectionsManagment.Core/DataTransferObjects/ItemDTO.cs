@@ -46,7 +46,7 @@ namespace CollectionsManagment.Core.DataTransferObjects
         public string? ThirdtBoolFieldName { get; set; }
         public bool? ThirdtBoolField { get; set; }
 
-        public List<LikeDTO> LikesDTO { get; set; }
+        public List<LikeDTO> LikesDTO{ get; set; }
         public List<CommentDTO> CommentsDTO { get; set; }
 
         public List<TagDTO> TagsDTO { get; set; }

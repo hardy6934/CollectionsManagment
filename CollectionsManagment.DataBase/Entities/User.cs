@@ -21,6 +21,9 @@ namespace CollectionsManagment.DataBase.Entities
         public Role Role { get; set; }
          
 
-        public List<Collection> Collections { get; set;}
+        public List<Collection> Collections { get; set; }
+        public List<Like> Likes { get; set; }
+        public List<Comment> Comments { get; set; }
+
     }
 }

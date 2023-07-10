@@ -4,6 +4,7 @@ using CollectionsManagment.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollectionsManagment.DataBase.Migrations
 {
     [DbContext(typeof(CollectionsManagmentContext))]
-    partial class CollectionsManagmentContextModelSnapshot : ModelSnapshot
+    [Migration("20230710113715_UpdateSenderIdToUserId")]
+    partial class UpdateSenderIdToUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,8 +95,6 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -228,8 +229,6 @@ namespace CollectionsManagment.DataBase.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Likes");
                 });
 
@@ -328,12 +327,6 @@ namespace CollectionsManagment.DataBase.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CollectionsManagment.DataBase.Entities.User", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Item");
                 });
 
@@ -353,12 +346,6 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.HasOne("CollectionsManagment.DataBase.Entities.Item", "Item")
                         .WithMany("Likes")
                         .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CollectionsManagment.DataBase.Entities.User", null)
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -423,10 +410,6 @@ namespace CollectionsManagment.DataBase.Migrations
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.User", b =>
                 {
                     b.Navigation("Collections");
-
-                    b.Navigation("Comments");
-
-                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

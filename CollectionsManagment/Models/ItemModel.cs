@@ -82,12 +82,12 @@ namespace CollectionsManagment.Models
         }
         public bool? ThirdtBoolField { get; set; }
 
-        public List<LikeDTO> LikesDTO { get; set; }
-        public List<CommentDTO> CommentsDTO { get; set; }
+        public List<LikeDTO> Likes { get; set; }
+        public List<CommentDTO> Comments { get; set; }
 
-        public List<TagDTO> TagsDTO { get; set; }
+        public List<TagDTO> Tags { get; set; }
 
         public int CollectionId { get; set; }
-        public CollectionDTO CollectionDTO { get; set; }
+        public CollectionDTO Collection { get; set; }
     }
 }

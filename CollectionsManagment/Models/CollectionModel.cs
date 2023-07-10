@@ -10,6 +10,6 @@ namespace CollectionsManagment.Models
 
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public List<Item> Items { get; set; } 
+        public List<ItemModel> Items { get; set; } 
     }
 }

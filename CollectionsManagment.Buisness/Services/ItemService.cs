@@ -33,7 +33,14 @@ namespace CollectionsManagment.Buisness.Services
         {
             var item = await unitOfWork.Items.FindBy(item => item.Id.Equals(id), item => item.Comments, item => item.Likes).FirstOrDefaultAsync();
             return mapper.Map<ItemDTO>(item);
+        } 
+        
+        public async Task<ItemDTO> GetItemByIdWithCommentsAndUsers(int id)
+        {
+            var item = await unitOfWork.Items.Get().Where(x=>x.Id.Equals(id)).Include(x=>x.Likes).Include(x=>x.Comments).ThenInclude(x=>x.User).FirstOrDefaultAsync();
+            return mapper.Map<ItemDTO>(item);
         }
+         
 
         public async Task<List<ItemDTO>> GetItemsByCollectionIdAsync(int id)
         {

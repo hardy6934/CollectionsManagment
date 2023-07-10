@@ -1,0 +1,153 @@
+﻿@model ItemModel
+
+@{
+    ViewData["Title"] = "Drop Collection";
+}
+
+<h3>Remove Collection</h3>
+
+<div class="container">
+
+    <div class="row"> 
+            <div style="border:5px solid black; border-radius: 10px; margin:0 auto 20px;  text-align:center" class="col-5">
+
+                <div>
+                    <input type="hidden" asp-for="@Model.Id" class="form-control" id="Id">
+                </div>
+
+                <div>
+                    <label asp-for="@Model.Name" class="form-label">Item name: </label>
+                    <label asp-for="@Model.Name" class="form-label">@Model.Name </label>
+                </div>
+
+                @if (@Model.FirstNumericField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.FirstNumericFieldName" class="form-label">@Model.FirstNumericFieldName </label>
+                        <label asp-for="@Model.FirstNumericField" class="form-label">@Model.FirstNumericField </label>
+                    </div>
+                }
+                @if (@Model.SecondNumericField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.SecondNumericFieldName" class="form-label">@Model.SecondNumericFieldName </label>
+                        <label asp-for="@Model.SecondNumericField" class="form-label">@Model.SecondNumericField </label>
+                    </div>
+                }
+                @if (@Model.ThirdNumericField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.ThirdNumericFieldName" class="form-label">@Model.ThirdNumericFieldName </label>
+                        <label asp-for="@Model.ThirdNumericField" class="form-label">@Model.ThirdNumericField </label>
+                    </div>
+                }
+                @if (@Model.FirstStringField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.FirstStringFieldName" class="form-label">@Model.FirstStringFieldName </label>
+                        <label asp-for="@Model.FirstStringField" class="form-label">@Model.FirstStringField </label>
+                    </div>
+                }
+                @if (@Model.SecondStringField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.SecondStringFieldName" class="form-label">@Model.SecondStringFieldName </label>
+                        <label asp-for="@Model.SecondStringField" class="form-label">@Model.SecondStringField </label>
+                    </div>
+                }
+                @if (@Model.ThirdStringField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.ThirdStringFieldName" class="form-label">@Model.ThirdStringFieldName </label>
+                        <label asp-for="@Model.ThirdStringField" class="form-label">@Model.ThirdStringField </label>
+                    </div>
+                }
+                @if (@Model.FirstBigStringField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.FirstBigStringFieldName" class="form-label">@Model.FirstBigStringFieldName </label>
+                        <label asp-for="@Model.FirstBigStringField" class="form-label">@Model.FirstBigStringField </label>
+                    </div>
+                }
+                @if (@Model.SecondBigStringField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.SecondBigStringFieldName" class="form-label">@Model.SecondBigStringFieldName </label>
+                        <label asp-for="@Model.SecondBigStringField" class="form-label">@Model.SecondBigStringField </label>
+                    </div>
+                }
+                @if (@Model.ThirdBigStringField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.ThirdBigStringFieldName" class="form-label">@Model.ThirdBigStringFieldName </label>
+                        <label asp-for="@Model.ThirdBigStringField" class="form-label">@Model.ThirdBigStringField </label>
+                    </div>
+                }
+                @if (@Model.FirstDatetimeField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.FirstDatetimeFieldName" class="form-label">@Model.FirstDatetimeFieldName </label>
+                        <label asp-for="@Model.FirstDatetimeField" class="form-label">@Model.FirstDatetimeField </label>
+                    </div>
+                }
+                @if (@Model.SecondDatetimeField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.SecondDatetimeFieldName" class="form-label">@Model.SecondDatetimeFieldName </label>
+                        <label asp-for="@Model.SecondDatetimeField" class="form-label">@Model.SecondDatetimeField </label>
+                    </div>
+                }
+
+                @if (@Model.ThirdDatetimeField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.ThirdDatetimeFieldName" class="form-label">@Model.ThirdDatetimeFieldName </label>
+                        <label asp-for="@Model.ThirdDatetimeField" class="form-label">@Model.ThirdDatetimeField </label>
+                    </div>
+                }
+
+                @if (@Model.FirstBoolField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.FirstBoolFieldName" class="form-label">@Model.FirstBoolFieldName </label>
+                        <label asp-for="@Model.FirstBoolField" class="form-label">@Model.FirstBoolField</label>
+                    </div>
+                }
+
+                @if (@Model.SecondBoolField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.SecondBoolFieldName" class="form-label">@Model.SecondBoolFieldName </label>
+                        <label asp-for="@Model.SecondBoolField" class="form-label">@Model.SecondBoolField </label>
+                    </div>
+                }
+
+                @if (@Model.ThirdtBoolField != null)
+                {
+                    <div>
+                        <label asp-for="@Model.ThirdtBoolFieldName" class="form-label">@Model.ThirdtBoolFieldName </label>
+                        <label asp-for="@Model.ThirdtBoolField" class="form-label">@Model.ThirdtBoolField </label>
+                    </div>
+                } 
+                
+                <div style="border:1px solid black">
+                    <p>Comments here:</p>
+                @if (@Model.Comments != null)
+                { 
+                        foreach(var n in Model.Comments)
+                        {
+                            <div>
+                                <label asp-for="@n.Content" class="form-label">@n.Content </label>
+                                <label asp-for="@n.dateTime" class="form-label">@n.dateTime </label>
+                                <label asp-for="@n.SenderName" class="form-label">@n.SenderName </label>
+                            
+                            </div>
+                        } 
+                }
+                </div>
+            
+
+            </div>
+             
+    </div>
+</div>
