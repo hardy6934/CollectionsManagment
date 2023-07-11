@@ -131,7 +131,7 @@
                 } 
                 
                 <div style="border:1px solid black">
-                    <p>Comments here:</p>
+                    <p>Comments:</p>
                 @if (@Model.Comments != null)
                 { 
                         foreach(var n in Model.Comments)
@@ -139,10 +139,17 @@
                             <div>
                                 <label asp-for="@n.Content" class="form-label">@n.Content </label>
                                 <label asp-for="@n.dateTime" class="form-label">@n.dateTime </label>
-                                <label asp-for="@n.SenderName" class="form-label">@n.SenderName </label>
-                            
+                                <label asp-for="@n.SenderName" class="form-label">@n.SenderName </label> 
                             </div>
                         } 
+
+
+                        <div style="border:1px solid black">
+
+                            <textarea class="form-control" placeholder="leave your comment here" id="CommentContent"></textarea>
+
+                            <button class="form-control" id="CreateComment">Отправить комментарий</button>
+                        </div>
                 }
                 </div>
             
@@ -151,3 +158,8 @@
              
     </div>
 </div>
+
+ 
+    
+<script src="~/js/createAndViewComment.js" asp-append-version="true"></script>
+ 

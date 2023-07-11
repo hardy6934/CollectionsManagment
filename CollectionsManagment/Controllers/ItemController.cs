@@ -86,6 +86,8 @@ namespace CollectionsManagment.Controllers
             return View("ConcretItemView", mapper.Map<ItemModel>(itemModel));
         }
 
+         
+
 
     }
 }
