@@ -17,5 +17,6 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<bool> IsCollectionEmpty(int collectionId);
         Task<ItemDTO> GetFirstItemFromCollectionByCollectionId(int collectionId);
         Task<ItemDTO> GetItemByIdWithCommentsAndUsers(int id);
+        Task<string> GetAccountIdByItemIdAsync(int id);
     }
 }

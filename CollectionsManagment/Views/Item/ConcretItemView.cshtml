@@ -130,7 +130,7 @@
                     </div>
                 } 
                 
-                <div style="border:1px solid black">
+                <div style="border:1px solid black" id="CommentRoom">
                     <p>Comments:</p>
                 @if (@Model.Comments != null)
                 { 
@@ -143,15 +143,17 @@
                             </div>
                         } 
 
-
-                        <div style="border:1px solid black">
-
-                            <textarea class="form-control" placeholder="leave your comment here" id="CommentContent"></textarea>
-
-                            <button class="form-control" id="CreateComment">Отправить комментарий</button>
-                        </div>
                 }
                 </div>
+
+
+
+            <div style="border:1px solid black">
+
+                <textarea class="form-control" placeholder="leave your comment here" id="CommentContent"></textarea>
+
+                <button class="form-control" id="CreateComment" onclick="create();">Отправить комментарий</button>
+            </div>
             
 
             </div>

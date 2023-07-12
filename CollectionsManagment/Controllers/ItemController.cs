@@ -85,8 +85,14 @@ namespace CollectionsManagment.Controllers
             var itemModel = await itemService.GetItemByIdWithCommentsAndUsers(id);
             return View("ConcretItemView", mapper.Map<ItemModel>(itemModel));
         }
-
          
+
+        public async Task<IActionResult> GetUserNameByItemId(int id)
+        {
+            var UserName = await itemService.GetAccountIdByItemIdAsync(id); 
+            ViewBag.UserName = UserName;
+            return View();
+        }
 
 
     }

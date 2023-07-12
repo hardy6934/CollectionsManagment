@@ -63,6 +63,12 @@ namespace CollectionsManagment.Buisness.Services
         {
             var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
             return mapper.Map<ItemDTO>(collection.Items.FirstOrDefault()); 
+        } 
+        
+        public async Task<string> GetAccountIdByItemIdAsync(int id)
+        {
+            var Item = await unitOfWork.Items.Get().Where(x => x.Id.Equals(id)).Include(x => x.Likes).Include(x => x.Comments).Include(x=>x.Collection).ThenInclude(x => x.User).FirstOrDefaultAsync();
+            return Item.Collection.User.FullName; 
         }
     }
 }
