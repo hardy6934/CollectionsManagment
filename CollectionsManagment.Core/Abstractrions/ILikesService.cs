@@ -8,5 +8,6 @@ namespace CollectionsManagment.Core.Abstractrions
 {
     public interface ILikesService
     {
+        Task<int> CreateLikeAsync(int itemId, int userId);
     }
 }

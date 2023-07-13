@@ -128,7 +128,14 @@
                         <label asp-for="@Model.ThirdtBoolFieldName" class="form-label">@Model.ThirdtBoolFieldName </label>
                         <label asp-for="@Model.ThirdtBoolField" class="form-label">@Model.ThirdtBoolField </label>
                     </div>
-                } 
+                }
+
+                <button class="like__btn" onclick="createLike()">
+                   <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                   <span id="count">@Model.Likes.Count</span> Like
+                </button>
+
+            @*<div>Likes Count: @Model.Likes.Count</div>*@
                 
                 <div style="border:1px solid black" id="CommentRoom">
                     <p>Comments:</p>
@@ -144,6 +151,7 @@
                         } 
 
                 }
+
                 </div>
 
 
@@ -164,4 +172,5 @@
  
     
 <script src="~/js/createAndViewComment.js" asp-append-version="true"></script>
+<script src="~/js/Like.js" asp-append-version="true"></script>
  
