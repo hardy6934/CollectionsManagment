@@ -8,5 +8,7 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<int> CreateTagAsync(TagDTO dto); 
         Task<int> RemoveTagAsync(TagDTO dto); 
         Task<int> UpdateTagAsync(TagDTO dto); 
+        Task<TagDTO> GetTagByIdAsync(int id);
+        Task<int> GetTagIdByTagNameAsync(string name);
     }
 }

@@ -1,0 +1,27 @@
+﻿@model TagModel
+
+@{
+    ViewData["Title"] = "Remove Tag"; 
+}
+
+<div>
+    <h1>Remove Tag</h1>
+
+    <form asp-controller="Tag" asp-action="RemoveTag" method="post" >
+
+
+        <div class="mb-3">
+            <input type="hidden" asp-for="Id" class="form-control" id="Id">
+        </div> 
+
+        <div class="mb-3">
+            <label asp-for="TagName" class="form-label">TagName:</label><br />
+            <label asp-for="TagName" class="form-label">@Model.TagName</label><br />
+        </div>
+
+
+        <input type="submit" class="btn btn-primary" value="Submit">
+
+
+    </form>
+</div> 

@@ -1,0 +1,56 @@
+﻿@model TagItemModel
+
+@{
+    ViewData["Title"] = "Create Tag for item"; 
+}
+
+<div>
+    <h1>Create Tag for item</h1>
+
+    <form asp-controller="TagItem" asp-action="CreateTagItem" method="post" >
+
+
+        <div class="mb-3">
+            <input type="hidden" asp-for="Item.Id" class="form-control" id="ItemId" value="@ViewBag.ItemId">
+        </div> 
+
+        <div class="mb-3">
+            <label asp-for="Tag.TagName" >Name of Tag</label><br/>
+            <input name="TagName" id="TagName" type = "text" placeholder = "Start writing"  required/>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Submit">
+
+
+    </form>
+</div> 
+
+@section Scripts
+    {
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+             <script >
+              //$( function() {
+              //  $( "#TagName" ).autocomplete({
+              //  source: `${window.location.origin}/TagItem/AutocompleteSearchTags` 
+              //  }); 
+              //} );
+
+
+        $("#TagName").autocomplete({
+            source: `${window.location.origin}/TagItem/AutocompleteSearchTags`,
+            change: function (event, ui) {
+                if (!ui.item) { $(this).val(''); }
+            }
+        });
+               
+          </script>  
+            
+           
+}

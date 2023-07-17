@@ -18,6 +18,7 @@ namespace CollectionsManagment.Abstractions.GenRepositoryAbstractions
         IRepository<Role> Role { get; }
         IRepository<User> Users { get; }  
         IRepository<Tag> Tags { get; }  
+        IRepository<TagItem> TagItems { get; }  
          
         Task<int> Commit();
     }

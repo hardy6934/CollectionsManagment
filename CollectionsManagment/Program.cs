@@ -54,6 +54,7 @@ namespace CollectionsManagment
             builder.Services.AddScoped<ILikesService, LikesService>(); 
             builder.Services.AddScoped<ICommentsService, CommentsService>(); 
             builder.Services.AddScoped<ITagService, TagService>(); 
+            builder.Services.AddScoped<ITagItemService, TagItemService>(); 
 
 
             //Dependency Injection GenericRepository
@@ -64,7 +65,8 @@ namespace CollectionsManagment
             builder.Services.AddScoped<IRepository<Comment>, Repository<Comment>>();
             builder.Services.AddScoped<IRepository<Item>, Repository<Item>>();
             builder.Services.AddScoped<IRepository<Like>, Repository<Like>>();  
-            builder.Services.AddScoped<IRepository<Tag>, Repository<Tag>>();  
+            builder.Services.AddScoped<IRepository<Tag>, Repository<Tag>>();   
+            builder.Services.AddScoped<IRepository<TagItem>, Repository<TagItem>>();   
 
             //Dependency Injection UnitOfWork
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

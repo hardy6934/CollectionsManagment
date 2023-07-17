@@ -1,11 +1,11 @@
-﻿namespace CollectionsManagment.Models
+﻿using CollectionsManagment.DataBase.Entities;
+
+namespace CollectionsManagment.Models
 {
     public class TagModel
     {
         public int Id { get; set; }
         public string TagName { get; set; }
-
-        public int ItemId { get; set; }
-        public string ItemName { get; set; }
+        public List<ItemModel> Items { get; set; }
     }
 }

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace CollectionsManagment.Core.DataTransferObjects
 {
-    public class TagDTO
+    public class TagItemDTO
     {
         public int Id { get; set; }
-        public string TagName { get; set; }
-        public List<ItemDTO> Items { get; set; }
+        public ItemDTO Item { get; set; }
+        public int ItemId { get; set; }
+        public TagDTO Tag { get; set; }
+        public int TagId { get; set; }
     }
 }

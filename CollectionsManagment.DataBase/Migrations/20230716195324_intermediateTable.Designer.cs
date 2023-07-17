@@ -4,6 +4,7 @@ using CollectionsManagment.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollectionsManagment.DataBase.Migrations
 {
     [DbContext(typeof(CollectionsManagmentContext))]
-    partial class CollectionsManagmentContextModelSnapshot : ModelSnapshot
+    [Migration("20230716195324_intermediateTable")]
+    partial class intermediateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,29 +270,6 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("CollectionsManagment.DataBase.Entities.TagItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("TagItem");
-                });
-
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -402,25 +382,6 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CollectionsManagment.DataBase.Entities.TagItem", b =>
-                {
-                    b.HasOne("CollectionsManagment.DataBase.Entities.Item", "Item")
-                        .WithMany("TagItem")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CollectionsManagment.DataBase.Entities.Tag", "Tag")
-                        .WithMany("TagItem")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
-
-                    b.Navigation("Tag");
-                });
-
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.User", b =>
                 {
                     b.HasOne("CollectionsManagment.DataBase.Entities.Account", "Account")
@@ -471,18 +432,11 @@ namespace CollectionsManagment.DataBase.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
-
-                    b.Navigation("TagItem");
                 });
 
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("CollectionsManagment.DataBase.Entities.Tag", b =>
-                {
-                    b.Navigation("TagItem");
                 });
 
             modelBuilder.Entity("CollectionsManagment.DataBase.Entities.User", b =>

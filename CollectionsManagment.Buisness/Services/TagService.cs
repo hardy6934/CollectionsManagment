@@ -3,6 +3,7 @@ using CollectionsManagment.Abstractions.GenRepositoryAbstractions;
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.DataBase.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,19 @@ namespace CollectionsManagment.Buisness.Services
         {
             unitOfWork.Tags.Update(mapper.Map<Tag>(dto));
             return await unitOfWork.Commit();
+        }
+
+        public async Task<TagDTO> GetTagByIdAsync(int id)
+        {
+            var tag = await unitOfWork.Tags.GetByIdAsync(id);
+            return mapper.Map<TagDTO>(tag);
+        }
+        public async Task<int> GetTagIdByTagNameAsync(string name)
+        {
+            var id = (await unitOfWork.Tags.Get().Where(x => x.TagName.Equals(name)).FirstOrDefaultAsync()).Id;
+             
+            return id;
+             
         }
     }
 }
