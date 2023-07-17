@@ -29,6 +29,8 @@
                 {
                     <div>
                         <label asp-for="FirstNumericFieldName" class="form-label">@Model.FirstNumericFieldName</label>
+                        <input type="hidden" asp-for="FirstNumericFieldName" value="@Model.FirstNumericFieldName" />
+
                         <input type="number" asp-for="FirstNumericField" class="form-control" value="" required>
                     </div>
                 }
@@ -37,6 +39,8 @@
                 {
                     <div>
                         <label asp-for="SecondNumericFieldName" class="form-label">@Model.SecondNumericFieldName</label>
+                        <input type="hidden" asp-for="SecondNumericFieldName" value="@Model.SecondNumericFieldName" />
+
                         <input type="number" asp-for="SecondNumericField" class="form-control" value="" required>
                     </div>
                 }
@@ -45,6 +49,8 @@
                 {
                     <div>
                         <label asp-for="ThirdNumericFieldName" class="form-label">@Model.ThirdNumericFieldName</label>
+                        <input type="hidden" asp-for="ThirdNumericFieldName" value="@Model.ThirdNumericFieldName" />
+
                         <input type="number" asp-for="ThirdNumericField" class="form-control" value="" required>
                     </div>
                 }
@@ -53,6 +59,8 @@
                 {
                     <div>
                         <label asp-for="FirstBigStringFieldName" class="form-label">@Model.FirstBigStringFieldName</label>
+                        <input type="hidden" asp-for="FirstBigStringFieldName" value="@Model.FirstBigStringFieldName" />
+
                         <textarea name="FirstBigStringField" class="form-control" required></textarea>
                     </div>
                 }
@@ -61,15 +69,19 @@
                 {
                     <div>
                         <label asp-for="SecondBigStringFieldName" class="form-label">@Model.SecondBigStringFieldName</label>
+                        <input type="hidden" asp-for="SecondBigStringFieldName" value="@Model.SecondBigStringFieldName" />
+
                         <textarea name="SecondBigStringField" class="form-control" required></textarea>
                     </div>
-                }
-                 
-                @if(Model.ThirdStringFieldName !=null)
+                } 
+
+                @if (Model.ThirdBigStringFieldName != null)
                 {
                     <div>
-                        <label asp-for="ThirdStringFieldName" class="form-label">@Model.ThirdStringFieldName</label>
-                        <textarea name="ThirdStringField" class="form-control" required></textarea>
+                        <label asp-for="ThirdBigStringFieldName" class="form-label">@Model.ThirdBigStringFieldName</label>
+                        <input type="hidden" asp-for="ThirdBigStringFieldName" value="@Model.ThirdBigStringFieldName" />
+
+                        <textarea name="ThirdBigStringField" class="form-control" required></textarea>
                     </div>
                 }
 
@@ -77,6 +89,8 @@
                 {
                     <div>
                         <label asp-for="FirstStringFieldName" class="form-label">@Model.FirstStringFieldName</label>
+                        <input type="hidden" asp-for="FirstStringFieldName" value="@Model.FirstStringFieldName" />
+
                         <input type="text" asp-for="FirstStringField" class="form-control" value="" required>
                     </div>
                 }
@@ -85,14 +99,18 @@
                 {
                     <div>
                         <label asp-for="SecondStringFieldName" class="form-label">@Model.SecondStringFieldName</label>
+                        <input type="hidden" asp-for="SecondStringFieldName" value="@Model.SecondStringFieldName" />
+
                         <input type="text" asp-for="SecondStringField" class="form-control" value="" required>
                     </div>
                 }
 
-                @if(Model.ThirdBigStringFieldName !=null)
+                @if (Model.ThirdStringFieldName != null)
                 {
                     <div>
                         <label asp-for="ThirdStringFieldName" class="form-label">@Model.ThirdStringFieldName</label>
+                        <input type="hidden" asp-for="ThirdStringFieldName" value="@Model.ThirdStringFieldName" />
+
                         <input type="text" asp-for="ThirdStringField" class="form-control" value="" required>
                     </div>
                 }
@@ -101,6 +119,8 @@
                 {
                     <div>
                         <label asp-for="FirstDatetimeFieldName" class="form-label">@Model.FirstDatetimeFieldName</label>
+                        <input type="hidden" asp-for="FirstDatetimeFieldName" value="@Model.FirstDatetimeFieldName" />
+
                         <input type="datetime-local" asp-for="FirstDatetimeField" class="form-control" value="" required>
                     </div>
                 }
@@ -109,6 +129,8 @@
                 {
                     <div>
                         <label asp-for="SecondDatetimeFieldName" class="form-label">@Model.SecondDatetimeFieldName</label>
+                        <input type="hidden" asp-for="SecondDatetimeFieldName" value="@Model.SecondDatetimeFieldName" />
+
                         <input type="datetime-local" asp-for="SecondDatetimeField" class="form-control" value="" required>
                     </div>
                 }
@@ -117,6 +139,8 @@
                 {
                     <div>
                         <label asp-for="ThirdDatetimeFieldName" class="form-label">@Model.ThirdDatetimeFieldName</label>
+                        <input type="hidden" asp-for="ThirdDatetimeFieldName" value="@Model.ThirdDatetimeFieldName" />
+
                         <input type="datetime-local" asp-for="ThirdDatetimeField" class="form-control" value="" required>
                     </div>
                 }
@@ -125,7 +149,10 @@
                 {
                     <div>
                         <label asp-for="FirstBoolFieldName" class="form-label">@Model.FirstBoolFieldName</label>
-                        <input type="checkbox" asp-for="FirstBoolField" class="form-control" value="" required>
+                        <input type="hidden" asp-for="FirstBoolFieldName" value="@Model.FirstBoolFieldName" />
+
+                        <input type="checkbox" asp-for="StringForFirstBoolField" value="true">
+                        <input type="hidden" asp-for="StringForFirstBoolField" value="false" />
                     </div>
                 }
 
@@ -133,7 +160,10 @@
                 {
                     <div>
                         <label asp-for="SecondBoolFieldName" class="form-label">@Model.SecondBoolFieldName</label>
-                        <input type="checkbox" asp-for="SecondBoolField" class="form-control" value="" required>
+                        <input type="hidden" asp-for="SecondBoolFieldName" value="@Model.SecondBoolFieldName" />
+
+                        <input type="checkbox" asp-for="StringForSecondBoolField" value="true">
+                        <input type="hidden" asp-for="StringForSecondBoolField" value="false" />
                     </div>
                 }
 
@@ -141,7 +171,10 @@
                 {
                     <div>
                         <label asp-for="ThirdtBoolFieldName" class="form-label">@Model.ThirdtBoolFieldName</label>
-                        <input type="checkbox" asp-for="ThirdtBoolField" class="form-control" value="" required>
+                        <input type="hidden" asp-for="ThirdtBoolFieldName" value="@Model.ThirdtBoolFieldName" />
+
+                        <input type="checkbox" asp-for="StringForThirdBoolField" value="true">
+                        <input type="hidden" asp-for="StringForThirdBoolField" value="false" />
                     </div>
                 }
                  

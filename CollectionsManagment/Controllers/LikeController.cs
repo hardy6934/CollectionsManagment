@@ -1,9 +1,11 @@
 ﻿using AutoMapper; 
-using CollectionsManagment.Core.Abstractrions; 
+using CollectionsManagment.Core.Abstractrions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollectionsManagment.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class LikeController : Controller
     {
         private readonly IMapper mapper;

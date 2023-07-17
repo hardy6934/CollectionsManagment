@@ -4,11 +4,14 @@ using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.DataBase.Entities;
 using CollectionsManagment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using System.Data;
 
 namespace CollectionsManagment.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class TagItemController : Controller
     {
         private readonly IMapper mapper; 

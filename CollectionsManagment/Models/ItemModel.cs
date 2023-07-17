@@ -40,7 +40,11 @@ namespace CollectionsManagment.Models
         public string StringForFirstBoolField
         {
             get {
-                return "";
+                if (FirstBoolField != null)
+                { 
+                    return FirstBoolField.ToString();
+                }
+                else return ""; 
             }
             set {
                 if (value != null)
@@ -55,7 +59,11 @@ namespace CollectionsManagment.Models
         {
             get
             {
-                return "";
+                if (SecondBoolField != null)
+                {
+                    return SecondBoolField.ToString();
+                }
+                else return "";
             }
             set
             {
@@ -71,7 +79,11 @@ namespace CollectionsManagment.Models
         {
             get
             {
-                return "";
+                if (ThirdtBoolField != null)
+                {
+                    return ThirdtBoolField.ToString();
+                }
+                else return "";
             }
             set
             {

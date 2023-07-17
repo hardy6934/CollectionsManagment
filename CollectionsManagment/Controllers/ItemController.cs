@@ -15,12 +15,16 @@ namespace CollectionsManagment.Controllers
         private readonly IMapper mapper;
         private readonly IItemService itemService; 
         private readonly ICollectionService collectionService; 
+        private readonly IAccountService accountService; 
+        private readonly IUserService userService; 
          
-        public ItemController(IItemService itemService, IMapper mapper, ICollectionService collectionService )
+        public ItemController(IItemService itemService, IMapper mapper, ICollectionService collectionService, IAccountService accountService, IUserService userService)
         {
             this.itemService = itemService;
             this.mapper = mapper;
             this.collectionService = collectionService;
+            this.accountService = accountService;
+            this.userService = userService;
 
         }
          
@@ -85,12 +89,22 @@ namespace CollectionsManagment.Controllers
             var itemModel = await itemService.GetItemByIdWithCommentsAndUsers(id);
             return View("ConcretItemView", mapper.Map<ItemModel>(itemModel));
         }
-         
 
+        [HttpGet]
         public async Task<IActionResult> GetUserNameByItemId(int id)
         {
             var UserName = await itemService.GetAccountIdByItemIdAsync(id); 
             ViewBag.UserName = UserName;
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCurrentUserNameAsync()
+        {
+            var accName = User.Identity.Name;
+            var accId = await accountService.GetIdAccountByEmailAsync(accName);
+            var CurrentUser = await userService.GetUsersByAccountId(accId);
+            ViewBag.UserName = CurrentUser.FullName;
             return View();
         }
 
