@@ -45,5 +45,12 @@ namespace CollectionsManagment.Buisness.Services
 
             return roles.Select(x=>mapper.Map<RoleDTO>(x)).ToList();
         }
+
+        public async Task<string> GetRoleByAccountName(string accName)
+        {
+            var acc = await unitOfWork.Accounts.Get().Where(x => x.Email.Equals(accName)).FirstOrDefaultAsync();
+            var user = await unitOfWork.Users.Get().Where(x => x.AccountId.Equals(acc.Id)).Include(x=>x.Role).FirstOrDefaultAsync();
+            return user.Role.RoleName;
+        }
     }
 }

@@ -4,6 +4,7 @@ using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.DataBase;
 using CollectionsManagment.DataBase.Entities;
 using CollectionsManagment.GenericRepository.GenRepository;
+using CollectionsManagment.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.WindowsAzure.Storage;
@@ -111,6 +112,9 @@ namespace CollectionsManagment
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+            app.UseMiddleware<CheckUserRoleMiddleware>();
 
             app.Run();
         }

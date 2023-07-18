@@ -11,6 +11,7 @@ namespace CollectionsManagment.Core.Abstractrions
     {
         Task<int> FindRoleIdByRoleName(string RoleName); 
         Task<List<RoleDTO>> GetAllRolesAsync();
+        Task<string> GetRoleByAccountName(string accName);
     }
 
 
