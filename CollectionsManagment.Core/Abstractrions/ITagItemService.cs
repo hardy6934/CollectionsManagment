@@ -13,6 +13,7 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<List<TagItemDTO>> GetAllTagsByItemId(int itemId);
         Task<int> RemoveTagItem(TagItemDTO dto);
         Task<TagItemDTO> GetTagItemByIdAsync(int id);
+        Task<List<TagItemDTOForTagCloud>> TagCloudAsync();
 
 
 

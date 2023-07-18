@@ -33,11 +33,11 @@ namespace CollectionsManagment.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddCollectionAsync()
+        public IActionResult AddCollection()
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> AddCollectionAsync(CollectionModel model)
         {

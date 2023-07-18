@@ -51,5 +51,16 @@ namespace CollectionsManagment.Buisness.Services
             return mapper.Map<TagItemDTO>(tagItem);
         }
 
+        public async Task<List<TagItemDTOForTagCloud>> TagCloudAsync()
+        {
+            var tagCloud = await unitOfWork.TagItems.Get().Include(x => x.Tag).GroupBy(x => x.TagId)
+              .Select(y => new TagItemDTOForTagCloud { TagName = y.FirstOrDefault().Tag.TagName, Count = y.Count() })
+              .ToListAsync();
+
+            return tagCloud;
+        }
+
+
+
     }
 }

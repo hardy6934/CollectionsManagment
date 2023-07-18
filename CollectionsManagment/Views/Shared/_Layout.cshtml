@@ -32,6 +32,10 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Collection" asp-action="CollectionView">My Collections</a> 
                             </li>
+
+                             <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="TagItem" asp-action="GetTagItemsForTagCloud">TagCloud</a>
+                            </li>
                         }
                         @if(User.IsInRole("Admin"))
                             {

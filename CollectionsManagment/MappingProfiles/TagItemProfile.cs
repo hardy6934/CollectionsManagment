@@ -17,7 +17,14 @@ namespace CollectionsManagment.MappingProfiles
             CreateMap<TagItemModel, TagItemDTO>();
 
 
-            CreateMap<TagItem, Tag>().ForMember(ent=>ent.Id, opt=>opt.MapFrom(ti=>ti.Tag.Id)).ForMember(ent => ent.TagName, opt => opt.MapFrom(ti => ti.Tag.TagName)); 
+            CreateMap<TagItem, Tag>().ForMember(ent=>ent.Id, opt=>opt.MapFrom(ti=>ti.Tag.Id)).ForMember(ent => ent.TagName, opt => opt.MapFrom(ti => ti.Tag.TagName));
+
+
+
+            CreateMap<TagItemDTOForTagCloud, TagItemModelForTagCloud>();
+            CreateMap<TagItemModelForTagCloud, TagItemDTOForTagCloud>();
+
+
         }
     }
 }

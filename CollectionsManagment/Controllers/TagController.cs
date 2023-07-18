@@ -29,11 +29,11 @@ namespace CollectionsManagment.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateTagAsync()
-        { 
+        public IActionResult CreateTag()
+        {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateTagAsync(TagModel tag)
         {

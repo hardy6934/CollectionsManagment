@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using CollectionsManagment.Buisness.Services;
 using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Data;
+using TagCloudGenerator;
 
 namespace CollectionsManagment.Controllers
 {
@@ -88,5 +90,14 @@ namespace CollectionsManagment.Controllers
         }
 
 
-    }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTagItemsForTagCloudAsync()
+        {
+            var tagCloud = await tagItemService.TagCloudAsync();
+            tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count)); 
+
+            return View(tagCloud.Select(x=>mapper.Map<TagItemModelForTagCloud>(x)).ToList());
+        }
+    }   
 }
