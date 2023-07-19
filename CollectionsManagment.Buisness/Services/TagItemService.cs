@@ -16,11 +16,13 @@ namespace CollectionsManagment.Buisness.Services
     {
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
+        private readonly ITagService tagService;
 
-        public TagItemService(IMapper mapper, IUnitOfWork unitOfWork)
+        public TagItemService(IMapper mapper, IUnitOfWork unitOfWork, ITagService tagService)
         {
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
+            this.tagService = tagService;
         }
         public async Task<int> CreateTagItemAsync(TagItemDTO dto)
         {
@@ -60,7 +62,15 @@ namespace CollectionsManagment.Buisness.Services
             return tagCloud;
         }
 
+        public async Task<List<TagItemDTO>> GetItemsByTagNameAsync(string tagName)
+        {
+            var tagid = await tagService.GetTagIdByTagNameAsync(tagName);
+            var tagitems = await unitOfWork.TagItems.Get().Where(x => x.TagId.Equals(tagid)).Include(x => x.Item).ToListAsync();
+             
 
+            return tagitems.Select(x=>mapper.Map<TagItemDTO>(x)).ToList();
+        }
+         
 
     }
 }

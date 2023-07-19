@@ -24,6 +24,7 @@ namespace CollectionsManagment.MappingProfiles
             CreateMap<TagItemDTOForTagCloud, TagItemModelForTagCloud>();
             CreateMap<TagItemModelForTagCloud, TagItemDTOForTagCloud>();
 
+             
 
         }
     }

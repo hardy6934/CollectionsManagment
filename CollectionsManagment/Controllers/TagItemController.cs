@@ -88,8 +88,7 @@ namespace CollectionsManagment.Controllers
             await tagItemService.RemoveTagItem(tagItem);
             return RedirectToAction("TagItemView", new { id = tagItem.ItemId});
         }
-
-
+         
 
         [HttpGet]
         public async Task<IActionResult> GetTagItemsForTagCloudAsync()
@@ -98,6 +97,14 @@ namespace CollectionsManagment.Controllers
             tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count)); 
 
             return View(tagCloud.Select(x=>mapper.Map<TagItemModelForTagCloud>(x)).ToList());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetItemsByTagNameAsync(string tagName)
+        {
+            var tagItems = await tagItemService.GetItemsByTagNameAsync(tagName);
+
+            return View(tagItems.Select(x=>mapper.Map<TagItemModel>(x)).ToList());
         }
     }   
 }
