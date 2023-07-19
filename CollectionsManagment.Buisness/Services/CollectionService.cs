@@ -58,7 +58,36 @@ namespace CollectionsManagment.Buisness.Services
             return dtos.Select(x=>mapper.Map<CollectionDTO>(x)).ToList();
         }
 
+        public async Task<List<CollectionDTO>> GetTopFiveBigestCollectionsAsync()
+        {
+            var dtos = await unitOfWork.Collections.Get().Include(x => x.Items).ToListAsync();
 
-         
+            dtos.Sort((x, y) => y.Items.Count().CompareTo(x.Items.Count()));
+
+            var topFive = dtos.Take(5).ToList();
+             
+            return topFive.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+              
+        }
+
+
+        //public async Task<List<ItemDTO>> GetThreeLastCreatedItemsAsync(int userId)
+        //{
+        //    var dtos = await unitOfWork.Collections.Get().Where(x => x.UserId.Equals(userId)).Include(x=>x.Items).ToListAsync();
+
+        //    List<Item> items = new();
+            
+        //    foreach (var item in dtos)
+        //    { 
+        //        items.AddRange(item.Items);
+        //    }
+        //    items.Sort((x, y) => y.Id.CompareTo(x.Id));
+            
+
+        //    return items.Take(3).Select(x => mapper.Map<ItemDTO>(x)).ToList();
+
+        //}
+
+
     }
 }

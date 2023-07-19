@@ -7,7 +7,7 @@ namespace CollectionsManagment.MappingProfiles
 {
     public class CollectionProfile : Profile
     {
-        public CollectionProfile() {
+        public CollectionProfile() { 
 
             CreateMap<Collection, CollectionDTO>().ForMember(dto => dto.UserName, opt => opt.MapFrom(acc => acc.User.FullName));
             CreateMap<CollectionDTO, Collection>();
