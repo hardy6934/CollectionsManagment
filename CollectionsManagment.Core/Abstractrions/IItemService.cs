@@ -18,5 +18,6 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<ItemDTO> GetFirstItemFromCollectionByCollectionId(int collectionId);
         Task<ItemDTO> GetItemByIdWithCommentsAndUsers(int id);
         Task<string> GetAccountIdByItemIdAsync(int id);
+        Task<List<ItemsDTOForMainPage>> GetThreeLastCreatedItemsAsync();
     }
 }

@@ -10,19 +10,17 @@ namespace CollectionsManagment.Controllers
     public class MainPageController : Controller
     {
         private readonly IMapper mapper;
-        private readonly ICollectionService collectionService;
-        private readonly IUserService userService;
-        private readonly IAccountService accountService;
+        private readonly ICollectionService collectionService; 
         private readonly IItemService itemService;
 
-        public MainPageController(IMapper mapper, ICollectionService collectionService, IUserService userService, IAccountService accountService, IItemService itemService)
+        public MainPageController(IMapper mapper, ICollectionService collectionService, IItemService itemService)
         {
             this.mapper = mapper;
-            this.collectionService = collectionService;
-            this.userService = userService;
-            this.accountService = accountService;
+            this.collectionService = collectionService; 
             this.itemService = itemService;
         }
+
+        [HttpGet]
         public async Task<IActionResult> MainWindeowViewAsync()
         { 
             var topFiveColls = await collectionService.GetTopFiveBigestCollectionsAsync();
@@ -30,15 +28,13 @@ namespace CollectionsManagment.Controllers
             return View(topFiveColls.Select(x=>mapper.Map<CollectionModel>(x)).ToList());
         }
 
-        //public async Task<IActionResult> GetLastCreatedItemsAsync()
-        //{
-        //    var accName = HttpContext.User.Identity.Name;
-        //    var accid = await accountService.GetIdAccountByEmailAsync(accName);
-        //    var user = await userService.GetUsersByAccountId(accid);
+        [HttpGet]
+        public async Task<IActionResult> GetLastCreatedItemsAsync()
+        { 
+            var items = await itemService.GetThreeLastCreatedItemsAsync();
 
-        //    var items = await collectionService.GetThreeLastCreatedItemsAsync(user.Id);
-
-        //    return View();
-        //}
+            return View(items.Select(x=>mapper.Map<ItemsModelForMainPage>(x)).ToList());
+        }
+ 
     }
 }

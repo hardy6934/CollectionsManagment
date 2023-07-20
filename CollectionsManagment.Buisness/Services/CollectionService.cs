@@ -71,22 +71,7 @@ namespace CollectionsManagment.Buisness.Services
         }
 
 
-        //public async Task<List<ItemDTO>> GetThreeLastCreatedItemsAsync(int userId)
-        //{
-        //    var dtos = await unitOfWork.Collections.Get().Where(x => x.UserId.Equals(userId)).Include(x=>x.Items).ToListAsync();
-
-        //    List<Item> items = new();
-            
-        //    foreach (var item in dtos)
-        //    { 
-        //        items.AddRange(item.Items);
-        //    }
-        //    items.Sort((x, y) => y.Id.CompareTo(x.Id));
-            
-
-        //    return items.Take(3).Select(x => mapper.Map<ItemDTO>(x)).ToList();
-
-        //}
+       
 
 
     }

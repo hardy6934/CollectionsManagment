@@ -70,5 +70,15 @@ namespace CollectionsManagment.Buisness.Services
             var Item = await unitOfWork.Items.Get().Where(x => x.Id.Equals(id)).Include(x => x.Likes).Include(x => x.Comments).Include(x=>x.Collection).ThenInclude(x => x.User).FirstOrDefaultAsync();
             return Item.Collection.User.FullName; 
         }
+        
+        public async Task<List<ItemsDTOForMainPage>> GetThreeLastCreatedItemsAsync()
+        {
+            var items = await unitOfWork.Items.Get().Include(x=>x.Collection).ToListAsync(); 
+            items.Reverse();
+
+            var LastThree = items.Take(3).ToList();
+
+            return LastThree.Select(x=>mapper.Map<ItemsDTOForMainPage>(x)).ToList(); 
+        }
     }
 }
