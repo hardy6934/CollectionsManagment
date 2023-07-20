@@ -4,7 +4,13 @@
     ViewData["Title"] = "TagCloud";
 
 }
-<div class="container">
+
+<div class="container" id="allTagsFromTagCloud">
+
+     <div style="display:flex; flex-direction:row; justify-content:flex-start; margin-bottom:5px">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" value="" style=" margin-right:5px" id="TagSearchValue">  
+        <button class="btn btn-primary" id="TagSearch">Search</button>
+    </div>
      
         <ol class="list-group list-group-numbered">
             @foreach (var n in Model)
@@ -19,3 +25,7 @@
         </ol>
 </div>
 
+
+
+<div id="tagAfterSearch"> 
+</div>

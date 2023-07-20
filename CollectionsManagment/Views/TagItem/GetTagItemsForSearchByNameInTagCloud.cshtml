@@ -1,0 +1,21 @@
+﻿@model List<TagItemModelForTagCloud>
+@{
+    Layout = null;
+}
+
+
+<div style="display:flex; flex-direction:row; justify-content:flex-start; margin-bottom:5px"> 
+    <button class="btn btn-primary" onclick="window.location.href = '/TagItem/GetTagItemsForTagCloud';"> Back</button>
+</div>
+
+<ol class="list-group list-group-numbered">
+    @foreach (var n in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold"><a style="text-decoration:none" asp-area="" asp-controller="TagItem" asp-action="GetItemsByTagName" asp-route-tagName="@n.TagName">@n.TagName</a></div>
+            </div>
+            <span class="badge bg-primary rounded-pill">@n.Count</span>
+        </li>
+    }
+</ol>

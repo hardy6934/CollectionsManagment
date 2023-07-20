@@ -36,7 +36,7 @@ namespace CollectionsManagment
                    options.AccessDeniedPath = new PathString("/Account/Authentication");
                    options.LoginPath = new PathString("/Account/Authentication");
                });
-             
+
 
             var connectionString = builder.Configuration.GetConnectionString("Default");
             //dependency Injection DataBase

@@ -106,5 +106,18 @@ namespace CollectionsManagment.Controllers
 
             return View(tagItems.Select(x=>mapper.Map<TagItemModel>(x)).ToList());
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetTagItemsForSearchByNameInTagCloudAsync(string name)
+        {
+            var tagCloud = await tagItemService.TagCloudAsync();
+            tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count));
+
+            var qwe = tagCloud.Where(x => x.TagName.Contains(name)).Select(x => mapper.Map<TagItemModelForTagCloud>(x)).ToList();
+
+            return View(qwe);
+        }
+
     }   
 }
