@@ -17,6 +17,7 @@ namespace CollectionsManagment.Core.Abstractrions
         Task<CollectionDTO> GetCollectionByIdWithIncludsAsync(int id);
         Task<List<CollectionDTO>> GetAllCollectionsForUserAsync(int id);
         Task<List<CollectionDTO>> GetTopFiveBigestCollectionsAsync();
+        Task<List<CollectionDTO>> FindCollectionsByNameOrDescAsync(string name);
         //Task<List<ItemDTO>> GetThreeLastCreatedItemsAsync(int userId);
     }
 }

@@ -73,5 +73,14 @@ namespace CollectionsManagment.Controllers
         }
 
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> SearchInCollectionsAsync(string name)
+        {
+            var collections = await collectionService.FindCollectionsByNameOrDescAsync(name);
+            return View(collections.Select(x => mapper.Map<CollectionModel>(x)).ToList());
+        }
+
+
     }
 }

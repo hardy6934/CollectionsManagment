@@ -4,6 +4,7 @@ using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.DataBase.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CollectionsManagment.Buisness.Services
 {
@@ -71,7 +72,13 @@ namespace CollectionsManagment.Buisness.Services
         }
 
 
-       
+        public async Task<List<CollectionDTO>> FindCollectionsByNameOrDescAsync(string name)
+        {
+            var dtos = await unitOfWork.Collections.FindBy(x => x.CollectionName.Contains(name) || x.Description.Contains(name)).Include(x => x.Items).ToListAsync();
+
+            return dtos.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+
+        }
 
 
     }

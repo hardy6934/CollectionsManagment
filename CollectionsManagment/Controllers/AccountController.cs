@@ -28,22 +28,22 @@ namespace CollectionsManagment.Controllers
         [HttpGet]
         public IActionResult Registration()
         {
-            //try
-            //{
+            try
+            {
                 return View();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return BadRequest();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> RegistrationAsync(RegistrationModel model)
         {
-            //try
-            //{
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     var email = model.Email;
@@ -55,8 +55,8 @@ namespace CollectionsManagment.Controllers
                         if (entity > 0)
                         {
                             var accountId = await accountService.GetIdAccountByEmailAsync(email);
-                            var IdRole = await roleService.FindRoleIdByRoleName("User"); 
-                            var defaultuser =   userService.CreateDefaultUser(accountId, IdRole );
+                            var IdRole = await roleService.FindRoleIdByRoleName("User");
+                            var defaultuser = userService.CreateDefaultUser(accountId, IdRole);
                             var Userentity = await userService.CreateUserAsync(defaultuser);
 
                             if (Userentity > 0)
@@ -68,33 +68,33 @@ namespace CollectionsManagment.Controllers
                     }
                 }
                 return View(model);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return NotFound();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return NotFound();
+            }
         }
 
         [HttpGet]
         public IActionResult Authentication()
         {
-            //try
-            //{
+            try
+            {
                 return View();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return BadRequest();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AuthenticationAsync(AuthenticationModel model)
         {
-            //try
-            //{
+            try
+            {
                 var isPasswordCorrect = await accountService.CheckUserPassword(mapper.Map<AccountDTO>(model));
                 if (isPasswordCorrect)
                 {
@@ -105,46 +105,46 @@ namespace CollectionsManagment.Controllers
                 {
                     return View(model);
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return BadRequest();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
 
         }
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-        //    try
-        //    {
+            try
+            {
                 await HttpContext.SignOutAsync();
 
                 return RedirectToAction("Index", "Home");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return BadRequest();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
 
         } 
 
         private async Task Authenticate(string email)
         {
-            //try
-            //{
+            try
+            {
                 var accountId = await accountService.GetIdAccountByEmailAsync(email);
 
                 var UserValuesWithIncludes = await userService.GetUsersByAccountId(accountId);
-             
+
 
                 var claims = new List<Claim>()
                 {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, UserValuesWithIncludes.AccountEmail),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, UserValuesWithIncludes.RoleName)};
-             
+
                 if (claims != null)
                 {
                     var identity = new ClaimsIdentity(claims,
@@ -155,11 +155,11 @@ namespace CollectionsManagment.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(identity));
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+            }
 
         }
 
@@ -167,26 +167,26 @@ namespace CollectionsManagment.Controllers
         [HttpGet]
         public ActionResult IsLoggedIn()
         {
-            //try
-            //{
+            try
+            {
                 if (!string.IsNullOrEmpty(HttpContext.User.Identity.Name))
                 {
                     return Ok(true);
                 }
                 else return Ok(false);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return NotFound();
-            //} 
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return NotFound();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> UserLoginPreview()
         {
-            //try
-            //{
+            try
+            {
                 if (User.Identities.Any(identity => identity.IsAuthenticated))
                 {
 
@@ -204,12 +204,12 @@ namespace CollectionsManagment.Controllers
                     return View(user);
                 }
                 return View();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return NotFound();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return NotFound();
+            }
 
         }
 
@@ -217,8 +217,8 @@ namespace CollectionsManagment.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserDataAsync()
         {
-            //try
-            //{
+            try
+            {
                 var accountEmail = User.Identity?.Name;
                 if (string.IsNullOrEmpty(accountEmail))
                 {
@@ -227,12 +227,12 @@ namespace CollectionsManagment.Controllers
                 var accountId = await accountService.GetIdAccountByEmailAsync(accountEmail);
                 var user = mapper.Map<UserShortDataModel>(await userService.GetUsersByAccountId(accountId));
                 return Ok(user);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
-            //    return NotFound();
-            //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return NotFound();
+            }
 
         }
 

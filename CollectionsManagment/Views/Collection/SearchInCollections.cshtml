@@ -1,16 +1,15 @@
 ﻿@model List<CollectionModel>
 
 @{
-    ViewData["Title"] = "Collections";
+    Layout = null;
 
 }
- 
 
-<div class="container" id="CollectionsBeforeSearch">
 
-    <div style="display:flex; flex-direction:row; justify-content:flex-start; margin-bottom:5px">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" value="" style=" margin-right:5px" id="SearchValueForCollection">
-        <button class="btn btn-primary"id="SearchInColl">Search</button>
+<div class="container">
+
+    <div style="display:flex; flex-direction:row; justify-content:flex-start; margin-bottom:5px"> 
+        <button class="btn btn-primary" onclick="window.location.href = '/Collection/GetAllCollections';">Back</button>
     </div>
 
     <div class="row">
@@ -29,23 +28,16 @@
                 </div>
 
                 <div>
-                    <label asp-for="@n.Description" class="form-label">Description: </label> 
+                    <label asp-for="@n.Description" class="form-label">Description: </label>
                     <label asp-for="@n.Description" class="form-label">@n.Description</label>
                 </div>
 
 
                 <a style="margin:5px auto; width:250px; " class="btn btn-primary" asp-area="" asp-controller="Item" asp-action="ItemsViewForAnonymous" asp-route-id="@n.Id">Check items</a> <br />
-                 
+
             </div>
 
         }
     </div>
 
 </div>
-
-
-<div id="CollsAfterSearch">
-     
-</div>
-
-<script src="~/js/SearchInCollections.js" asp-append-version="true"></script>
