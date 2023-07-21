@@ -19,20 +19,27 @@ namespace CollectionsManagment.Buisness.Services
             this.unitOfWork = unitOfWork;
         }
         public async Task<int> CreateLikeAsync(int itemId, int userId)
-        { 
-             
-            Like like = new()
+        {
+            try
             {
-                ItemId = itemId,
-                UserId = userId
-            };
+                Like like = new()
+                {
+                    ItemId = itemId,
+                    UserId = userId
+                };
 
-            if (!unitOfWork.Likes.Get().Any(x => x.UserId.Equals(like.UserId) && x.ItemId.Equals(like.ItemId)))
-            {
-                await unitOfWork.Likes.AddAsync(like);
-                return await unitOfWork.Commit();
+                if (!unitOfWork.Likes.Get().Any(x => x.UserId.Equals(like.UserId) && x.ItemId.Equals(like.ItemId)))
+                {
+                    await unitOfWork.Likes.AddAsync(like);
+                    return await unitOfWork.Commit();
+                }
+                else return 0;
             }
-            else return 0;
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
     }
 }

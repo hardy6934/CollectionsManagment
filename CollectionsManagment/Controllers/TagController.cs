@@ -6,6 +6,7 @@ using CollectionsManagment.GenericRepository.GenRepository;
 using CollectionsManagment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace CollectionsManagment.Controllers
 {
@@ -24,49 +25,112 @@ namespace CollectionsManagment.Controllers
         [HttpGet]
         public async Task<IActionResult> TagsViewAsync()
         {
-            var tags = await tagService.GetAllTagsAsync();
-            return View(tags.Select(x=>mapper.Map<TagModel>(x)).ToList());
+            try
+            {
+                var tags = await tagService.GetAllTagsAsync();
+                return View(tags.Select(x => mapper.Map<TagModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpGet]
         public IActionResult CreateTag()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateTagAsync(TagModel tag)
         {
-            await tagService.CreateTagAsync(mapper.Map<TagDTO>(tag));
-            return RedirectToAction("TagsView");
+            try
+            {
+                await tagService.CreateTagAsync(mapper.Map<TagDTO>(tag));
+                return RedirectToAction("TagsView");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpGet]
         public async Task<IActionResult> UpdateTagAsync(int id)
         {
-            var tag = await tagService.GetTagByIdAsync(id);
-            return View(mapper.Map<TagModel>(tag));
+            try
+            {
+                var tag = await tagService.GetTagByIdAsync(id);
+                return View(mapper.Map<TagModel>(tag));
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateTagAsync(TagModel tag)
         {
-            await tagService.UpdateTagAsync(mapper.Map<TagDTO>(tag));
-            return RedirectToAction("TagsView");
+            try
+            {
+                await tagService.UpdateTagAsync(mapper.Map<TagDTO>(tag));
+                return RedirectToAction("TagsView");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpGet]
         public async Task<IActionResult> RemoveTagAsync(int id)
         {
-            var tag = await tagService.GetTagByIdAsync(id);
-            return View(mapper.Map<TagModel>(tag));
+            try
+            {
+                var tag = await tagService.GetTagByIdAsync(id);
+                return View(mapper.Map<TagModel>(tag));
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> RemoveTagAsync(TagModel tag)
         {
-            await tagService.RemoveTagAsync(mapper.Map<TagDTO>(tag));
-            return RedirectToAction("TagsView");
+            try
+            {
+                await tagService.RemoveTagAsync(mapper.Map<TagDTO>(tag));
+                return RedirectToAction("TagsView");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
     }

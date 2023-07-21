@@ -26,49 +26,91 @@ namespace CollectionsManagment.Buisness.Services
         }
         public async Task<int> CreateTagItemAsync(TagItemDTO dto)
         {
-            await unitOfWork.TagItems.AddAsync(mapper.Map<TagItem>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                await unitOfWork.TagItems.AddAsync(mapper.Map<TagItem>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<List<TagItemDTO>> GetAllTagsByItemId(int itemId)
         {
-            //var tagItems = await unitOfWork.TagItems.FindBy(x => x.ItemId.Equals(itemId)).Include(x => x.Tag).ToListAsync();
-            //var tags = tagItems.Select(x => mapper.Map<Tag>(x));
+            try
+            {
+                //var tagItems = await unitOfWork.TagItems.FindBy(x => x.ItemId.Equals(itemId)).Include(x => x.Tag).ToListAsync();
+                //var tags = tagItems.Select(x => mapper.Map<Tag>(x));
 
-            //return tags.Select(x => mapper.Map<TagDTO>(x)).ToList();
+                //return tags.Select(x => mapper.Map<TagDTO>(x)).ToList();
 
-            var tagItems = await unitOfWork.TagItems.FindBy(x => x.ItemId.Equals(itemId)).Include(x => x.Tag).ToListAsync();
-            return tagItems.Select(x => mapper.Map<TagItemDTO>(x)).ToList();
+                var tagItems = await unitOfWork.TagItems.FindBy(x => x.ItemId.Equals(itemId)).Include(x => x.Tag).ToListAsync();
+                return tagItems.Select(x => mapper.Map<TagItemDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<int> RemoveTagItem(TagItemDTO dto)
         {
-            unitOfWork.TagItems.Remove(mapper.Map<TagItem>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.TagItems.Remove(mapper.Map<TagItem>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<TagItemDTO> GetTagItemByIdAsync(int id)
         {
-            var tagItem = await unitOfWork.TagItems.FindBy(x => x.Id.Equals(id)).Include(x => x.Tag).AsNoTracking().FirstOrDefaultAsync();
-            return mapper.Map<TagItemDTO>(tagItem);
+            try
+            {
+                var tagItem = await unitOfWork.TagItems.FindBy(x => x.Id.Equals(id)).Include(x => x.Tag).AsNoTracking().FirstOrDefaultAsync();
+                return mapper.Map<TagItemDTO>(tagItem);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<List<TagItemDTOForTagCloud>> TagCloudAsync()
         {
-            var tagCloud = await unitOfWork.TagItems.Get().Include(x => x.Tag).GroupBy(x => x.TagId)
-              .Select(y => new TagItemDTOForTagCloud { TagName = y.FirstOrDefault().Tag.TagName, Count = y.Count() })
-              .ToListAsync();
+            try
+            {
+                var tagCloud = await unitOfWork.TagItems.Get().Include(x => x.Tag).GroupBy(x => x.TagId)
+                  .Select(y => new TagItemDTOForTagCloud { TagName = y.FirstOrDefault().Tag.TagName, Count = y.Count() })
+                  .ToListAsync();
 
-            return tagCloud;
+                return tagCloud;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<List<TagItemDTO>> GetItemsByTagNameAsync(string tagName)
         {
-            var tagid = await tagService.GetTagIdByTagNameAsync(tagName);
-            var tagitems = await unitOfWork.TagItems.Get().Where(x => x.TagId.Equals(tagid)).Include(x => x.Item).ToListAsync();
-             
+            try
+            {
+                var tagid = await tagService.GetTagIdByTagNameAsync(tagName);
+                var tagitems = await unitOfWork.TagItems.Get().Where(x => x.TagId.Equals(tagid)).Include(x => x.Item).ToListAsync();
 
-            return tagitems.Select(x=>mapper.Map<TagItemDTO>(x)).ToList();
+
+                return tagitems.Select(x => mapper.Map<TagItemDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
          
 

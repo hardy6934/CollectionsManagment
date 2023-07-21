@@ -6,6 +6,7 @@ using CollectionsManagment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace CollectionsManagment.Controllers
 {
@@ -26,41 +27,87 @@ namespace CollectionsManagment.Controllers
 
         public async Task<IActionResult> CollectionViewAsync()
         { 
-            var accountId = await accountService.GetIdAccountByEmailAsync(User.Identity.Name);
-            var user = await userService.GetUsersByAccountId(accountId);
-            var models = await collectionService.GetAllCollectionsForUserAsync(user.Id);
-            return View(models.Select(x=>mapper.Map<CollectionModel>(x)).ToList());
+            
+            try
+            {
+                var accountId = await accountService.GetIdAccountByEmailAsync(User.Identity.Name);
+                var user = await userService.GetUsersByAccountId(accountId);
+                var models = await collectionService.GetAllCollectionsForUserAsync(user.Id);
+                return View(models.Select(x => mapper.Map<CollectionModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+            
         }
 
         [HttpGet]
         public IActionResult AddCollection()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> AddCollectionAsync(CollectionModel model)
         {
-            var accountId = await accountService.GetIdAccountByEmailAsync(User.Identity.Name);
-            var user = await userService.GetUsersByAccountId(accountId);
-            model.UserId = user.Id;
-            await collectionService.CreateCollectionAsync(mapper.Map<CollectionDTO>(model));
-            return RedirectToAction("CollectionView");
+            try
+            {
+                var accountId = await accountService.GetIdAccountByEmailAsync(User.Identity.Name);
+                var user = await userService.GetUsersByAccountId(accountId);
+                model.UserId = user.Id;
+                await collectionService.CreateCollectionAsync(mapper.Map<CollectionDTO>(model));
+                return RedirectToAction("CollectionView");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+            
         }
 
         [HttpGet]
         public async Task<IActionResult> DeleteCollectionAsync(int Id)
         {
-            var collection = await collectionService.GetCollectionByIdAsync(Id);
-            return View(mapper.Map<CollectionModel>(collection));
+            try
+            {
+                var collection = await collectionService.GetCollectionByIdAsync(Id);
+                return View(mapper.Map<CollectionModel>(collection));
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteCollectionAsync(CollectionModel model)
         {
-             
-            await collectionService.DeleteCollectionAsync(mapper.Map<CollectionDTO>(model));
-            return RedirectToAction("CollectionView");
+            try
+            {
+                await collectionService.DeleteCollectionAsync(mapper.Map<CollectionDTO>(model));
+                return RedirectToAction("CollectionView");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
+            
         }
 
 
@@ -68,8 +115,17 @@ namespace CollectionsManagment.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllCollections()
         {
-            var collections = await collectionService.GetAllCollectionsAsync();
-            return View(collections.Select(x=>mapper.Map<CollectionModel>(x)).ToList());
+            try
+            {
+                var collections = await collectionService.GetAllCollectionsAsync();
+                return View(collections.Select(x => mapper.Map<CollectionModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+            
         }
 
 
@@ -77,8 +133,17 @@ namespace CollectionsManagment.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> SearchInCollectionsAsync(string name)
         {
-            var collections = await collectionService.FindCollectionsByNameOrDescAsync(name);
-            return View(collections.Select(x => mapper.Map<CollectionModel>(x)).ToList());
+            try
+            {
+                var collections = await collectionService.FindCollectionsByNameOrDescAsync(name);
+                return View(collections.Select(x => mapper.Map<CollectionModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+            
         }
 
 

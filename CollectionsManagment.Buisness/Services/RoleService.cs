@@ -40,17 +40,30 @@ namespace CollectionsManagment.Buisness.Services
 
         public async Task<List<RoleDTO>> GetAllRolesAsync()
         {
-            var roles =  await unitOfWork.Role.GetAllAsync();
+            try
+            {
+                var roles = await unitOfWork.Role.GetAllAsync();
 
-
-            return roles.Select(x=>mapper.Map<RoleDTO>(x)).ToList();
+                return roles.Select(x => mapper.Map<RoleDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<string> GetRoleByAccountName(string accName)
         {
-            var acc = await unitOfWork.Accounts.Get().Where(x => x.Email.Equals(accName)).FirstOrDefaultAsync();
-            var user = await unitOfWork.Users.Get().Where(x => x.AccountId.Equals(acc.Id)).Include(x=>x.Role).FirstOrDefaultAsync();
-            return user.Role.RoleName;
+            try
+            {
+                var acc = await unitOfWork.Accounts.Get().Where(x => x.Email.Equals(accName)).FirstOrDefaultAsync();
+                var user = await unitOfWork.Users.Get().Where(x => x.AccountId.Equals(acc.Id)).Include(x => x.Role).FirstOrDefaultAsync();
+                return user.Role.RoleName;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

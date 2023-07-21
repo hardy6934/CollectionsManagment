@@ -2,6 +2,7 @@
 using CollectionsManagment.Core.Abstractrions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace CollectionsManagment.Controllers
 {
@@ -26,17 +27,26 @@ namespace CollectionsManagment.Controllers
 
         public async Task<IActionResult> CreateLikeAsync(int itemId)
         {
-            var email = User.Identity.Name;
-            var accId = await accountService.GetIdAccountByEmailAsync(email);
-            var user = await userService.GetUsersByAccountId(accId);
-
-            var res = await likesService.CreateLikeAsync(itemId, user.Id);
-
-            if ( res == 1)
+            try
             {
-                return StatusCode(201);
+
+                var email = User.Identity.Name;
+                var accId = await accountService.GetIdAccountByEmailAsync(email);
+                var user = await userService.GetUsersByAccountId(accId);
+
+                var res = await likesService.CreateLikeAsync(itemId, user.Id);
+
+                if (res == 1)
+                {
+                    return StatusCode(201);
+                }
+                else return StatusCode(304);
             }
-            else return StatusCode(304);
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
         }
     }
 }

@@ -18,8 +18,16 @@ namespace CollectionsManagment.Buisness.Services
         }
         public async Task<int> CreateCommentAsync(CommentDTO dto)
         {
-            await unitOfWork.Comments.AddAsync(mapper.Map<Comment>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                await unitOfWork.Comments.AddAsync(mapper.Map<Comment>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
     }
 }

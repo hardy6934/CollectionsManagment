@@ -4,6 +4,7 @@ using CollectionsManagment.Core.DataTransferObjects;
 using CollectionsManagment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace CollectionsManagment.Controllers
 {
@@ -25,16 +26,25 @@ namespace CollectionsManagment.Controllers
 
 
         public async Task<IActionResult> CreateCommentAsync(CommentModel model)
-        {
-            var email = HttpContext.User.Identity.Name;
-            var accId = await accountService.GetIdAccountByEmailAsync(email);
-            var user = await userService.GetUsersByAccountId(accId);
+        { 
 
-            model.UserId = user.Id;
-            model.dateTime= DateTime.Now;
-            await commentsService.CreateCommentAsync(mapper.Map<CommentDTO>(model));
+            try
+            {
+                var email = HttpContext.User.Identity.Name;
+                var accId = await accountService.GetIdAccountByEmailAsync(email);
+                var user = await userService.GetUsersByAccountId(accId);
 
-            return Ok();
+                model.UserId = user.Id;
+                model.dateTime = DateTime.Now;
+                await commentsService.CreateCommentAsync(mapper.Map<CommentDTO>(model));
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
         }
     }
 }

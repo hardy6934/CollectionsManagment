@@ -20,26 +20,61 @@ namespace CollectionsManagment.Buisness.Services
 
         public async Task<int> CreateCollectionAsync(CollectionDTO dto)
         {
-            await unitOfWork.Collections.AddAsync(mapper.Map<Collection>(dto)); 
-            return await unitOfWork.Commit();
+            try
+            {
+
+                await unitOfWork.Collections.AddAsync(mapper.Map<Collection>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+           
         }
 
         public async Task<int> DeleteCollectionAsync(CollectionDTO dto)
         {
-            unitOfWork.Collections.Remove(mapper.Map<Collection>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.Collections.Remove(mapper.Map<Collection>(dto));
+                return await unitOfWork.Commit();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<List<CollectionDTO>> GetAllCollectionsAsync()
         {
-            var dtos = await unitOfWork.Collections.GetAllAsync();
-            return dtos.Select(x=>mapper.Map<CollectionDTO>(x)).ToList();
+            try
+            {
+
+                var dtos = await unitOfWork.Collections.GetAllAsync();
+                return dtos.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<CollectionDTO> GetCollectionByIdAsync(int id)
         {
-            var dto = await unitOfWork.Collections.GetByIdAsync(id);
-            return mapper.Map<CollectionDTO>(dto);
+            try
+            {
+                var dto = await unitOfWork.Collections.GetByIdAsync(id);
+                return mapper.Map<CollectionDTO>(dto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<CollectionDTO> GetCollectionByIdWithIncludsAsync(int id)
@@ -49,34 +84,66 @@ namespace CollectionsManagment.Buisness.Services
 
         public async Task<int> UpdateCollectionAsync(CollectionDTO dto)
         {
-            unitOfWork.Collections.Update(mapper.Map<Collection>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.Collections.Update(mapper.Map<Collection>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         } 
         
         public async Task<List<CollectionDTO>> GetAllCollectionsForUserAsync(int id)
         {
-            var dtos = await unitOfWork.Collections.Get().Select(x=>x).Where(x=>x.UserId.Equals(id)).ToListAsync();
-            return dtos.Select(x=>mapper.Map<CollectionDTO>(x)).ToList();
+            try
+            {
+                var dtos = await unitOfWork.Collections.Get().Select(x => x).Where(x => x.UserId.Equals(id)).ToListAsync();
+                return dtos.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<List<CollectionDTO>> GetTopFiveBigestCollectionsAsync()
         {
-            var dtos = await unitOfWork.Collections.Get().Include(x => x.Items).ToListAsync();
+            try
+            {
+                var dtos = await unitOfWork.Collections.Get().Include(x => x.Items).ToListAsync();
 
-            dtos.Sort((x, y) => y.Items.Count().CompareTo(x.Items.Count()));
+                dtos.Sort((x, y) => y.Items.Count().CompareTo(x.Items.Count()));
 
-            var topFive = dtos.Take(5).ToList();
-             
-            return topFive.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+                var topFive = dtos.Take(5).ToList();
+
+                return topFive.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
               
         }
 
 
         public async Task<List<CollectionDTO>> FindCollectionsByNameOrDescAsync(string name)
         {
-            var dtos = await unitOfWork.Collections.FindBy(x => x.CollectionName.Contains(name) || x.Description.Contains(name)).Include(x => x.Items).ToListAsync();
+            try
+            {
+                var dtos = await unitOfWork.Collections.FindBy(x => x.CollectionName.Contains(name) || x.Description.Contains(name)).Include(x => x.Items).ToListAsync();
 
-            return dtos.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+                return dtos.Select(x => mapper.Map<CollectionDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
 
         }
 

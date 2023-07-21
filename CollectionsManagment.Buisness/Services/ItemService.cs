@@ -19,66 +19,146 @@ namespace CollectionsManagment.Buisness.Services
         }
         public async Task<int> CreateItemAsync(ItemDTO dto)
         {
-            await unitOfWork.Items.AddAsync(mapper.Map<Item>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                await unitOfWork.Items.AddAsync(mapper.Map<Item>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<int> DeleteItemAsync(ItemDTO dto)
         {
-            unitOfWork.Items.Remove(mapper.Map<Item>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.Items.Remove(mapper.Map<Item>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<ItemDTO> GetItemById(int id)
         {
-            var item = await unitOfWork.Items.FindBy(item => item.Id.Equals(id), item => item.Comments, item => item.Likes).FirstOrDefaultAsync();
-            return mapper.Map<ItemDTO>(item);
+            try
+            {
+                var item = await unitOfWork.Items.FindBy(item => item.Id.Equals(id), item => item.Comments, item => item.Likes).FirstOrDefaultAsync();
+                return mapper.Map<ItemDTO>(item);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         } 
         
         public async Task<ItemDTO> GetItemByIdWithCommentsAndUsers(int id)
         {
-            var item = await unitOfWork.Items.Get().Where(x=>x.Id.Equals(id)).Include(x=>x.Likes).Include(x=>x.Comments).ThenInclude(x=>x.User).FirstOrDefaultAsync();
-            return mapper.Map<ItemDTO>(item);
+            try
+            {
+                var item = await unitOfWork.Items.Get().Where(x => x.Id.Equals(id)).Include(x => x.Likes).Include(x => x.Comments).ThenInclude(x => x.User).FirstOrDefaultAsync();
+                return mapper.Map<ItemDTO>(item);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
          
 
         public async Task<List<ItemDTO>> GetItemsByCollectionIdAsync(int id)
         {
-            var items = await unitOfWork.Items.FindBy(item => item.CollectionId.Equals(id), item => item.Comments, item => item.Likes).ToListAsync();
-            return items.Select(x=> mapper.Map<ItemDTO>(x)).ToList();
+            try
+            {
+                var items = await unitOfWork.Items.FindBy(item => item.CollectionId.Equals(id), item => item.Comments, item => item.Likes).ToListAsync();
+                return items.Select(x => mapper.Map<ItemDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<int> UpdateItemAsync(ItemDTO dto)
         {
-            unitOfWork.Items.Update(mapper.Map<Item>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.Items.Update(mapper.Map<Item>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<bool> IsCollectionEmpty(int collectionId)
         {
-            var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
-            return collection.Items.Any(); 
+            try
+            {
+                var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
+                return collection.Items.Any();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
         public async Task<ItemDTO> GetFirstItemFromCollectionByCollectionId(int collectionId)
         {
-            var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
-            return mapper.Map<ItemDTO>(collection.Items.FirstOrDefault()); 
+            try
+            {
+                var collection = await unitOfWork.Collections.FindBy(col => col.Id.Equals(collectionId), col => col.Items).FirstOrDefaultAsync();
+                return mapper.Map<ItemDTO>(collection.Items.FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         } 
         
         public async Task<string> GetAccountIdByItemIdAsync(int id)
         {
-            var Item = await unitOfWork.Items.Get().Where(x => x.Id.Equals(id)).Include(x => x.Likes).Include(x => x.Comments).Include(x=>x.Collection).ThenInclude(x => x.User).FirstOrDefaultAsync();
-            return Item.Collection.User.FullName; 
+            try
+            {
+                var Item = await unitOfWork.Items.Get().Where(x => x.Id.Equals(id)).Include(x => x.Likes).Include(x => x.Comments).Include(x => x.Collection).ThenInclude(x => x.User).FirstOrDefaultAsync();
+                return Item.Collection.User.FullName;
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
         }
         
         public async Task<List<ItemsDTOForMainPage>> GetThreeLastCreatedItemsAsync()
         {
-            var items = await unitOfWork.Items.Get().Include(x=>x.Collection).ToListAsync(); 
-            items.Reverse();
+            try
+            {
 
-            var LastThree = items.Take(3).ToList();
+                var items = await unitOfWork.Items.Get().Include(x => x.Collection).ToListAsync();
+                items.Reverse();
 
-            return LastThree.Select(x=>mapper.Map<ItemsDTOForMainPage>(x)).ToList(); 
+                var LastThree = items.Take(3).ToList();
+
+                return LastThree.Select(x => mapper.Map<ItemsDTOForMainPage>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

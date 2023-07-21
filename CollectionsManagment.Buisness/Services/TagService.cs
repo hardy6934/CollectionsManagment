@@ -26,38 +26,80 @@ namespace CollectionsManagment.Buisness.Services
         }
         public async Task<int> CreateTagAsync(TagDTO dto)
         {
-            await unitOfWork.Tags.AddAsync(mapper.Map<Tag>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                await unitOfWork.Tags.AddAsync(mapper.Map<Tag>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
           
         public async Task<List<TagDTO>> GetAllTagsAsync()
         {
-            var tags = await unitOfWork.Tags.GetAllAsync();
-            return tags.Select(x=>mapper.Map<TagDTO>(x)).ToList();
+            try
+            {
+                var tags = await unitOfWork.Tags.GetAllAsync();
+                return tags.Select(x => mapper.Map<TagDTO>(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<int> RemoveTagAsync(TagDTO dto)
         {
-            unitOfWork.Tags.Remove(mapper.Map<Tag>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.Tags.Remove(mapper.Map<Tag>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<int> UpdateTagAsync(TagDTO dto)
         {
-            unitOfWork.Tags.Update(mapper.Map<Tag>(dto));
-            return await unitOfWork.Commit();
+            try
+            {
+                unitOfWork.Tags.Update(mapper.Map<Tag>(dto));
+                return await unitOfWork.Commit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<TagDTO> GetTagByIdAsync(int id)
         {
-            var tag = await unitOfWork.Tags.GetByIdAsync(id);
-            return mapper.Map<TagDTO>(tag);
+            try
+            {
+                var tag = await unitOfWork.Tags.GetByIdAsync(id);
+                return mapper.Map<TagDTO>(tag);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public async Task<int> GetTagIdByTagNameAsync(string name)
         {
-            var id = (await unitOfWork.Tags.Get().Where(x => x.TagName.Equals(name)).FirstOrDefaultAsync()).Id;
-             
-            return id;
+            try
+            {
+                var id = (await unitOfWork.Tags.Get().Where(x => x.TagName.Equals(name)).FirstOrDefaultAsync()).Id;
+
+                return id;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
              
         }
     }

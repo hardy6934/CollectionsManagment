@@ -28,9 +28,18 @@ namespace CollectionsManagment.Controllers
         }
         public async Task<IActionResult> TagItemViewAsync(int id)
         {
-            ViewBag.ItemId = id;
-            var tags = await tagItemService.GetAllTagsByItemId(id);
-            return View(tags.Select(x=>mapper.Map<TagItemModel>(x)).ToList());
+            try
+            {
+                ViewBag.ItemId = id;
+                var tags = await tagItemService.GetAllTagsByItemId(id);
+                return View(tags.Select(x => mapper.Map<TagItemModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
 
@@ -60,63 +69,126 @@ namespace CollectionsManagment.Controllers
         [HttpGet]
         public IActionResult CreateTagItemAsync(int id)
         {
-            ViewBag.ItemId = id;
-            return View();
+            try
+            {
+                ViewBag.ItemId = id;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateTagItemAsync( int id, string TagName)
         {
-            var tagId =  await tagService.GetTagIdByTagNameAsync(TagName);
+            try
+            {
 
-            var model = new TagItemModel { ItemId = id, TagId = tagId };
-            await tagItemService.CreateTagItemAsync(mapper.Map<TagItemDTO>(model));
-            return RedirectToAction("TagItemView",new { id = id});
+                var tagId = await tagService.GetTagIdByTagNameAsync(TagName);
+
+                var model = new TagItemModel { ItemId = id, TagId = tagId };
+                await tagItemService.CreateTagItemAsync(mapper.Map<TagItemDTO>(model));
+                return RedirectToAction("TagItemView", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
         }
         
         [HttpGet]
         public async Task<IActionResult> RemoveTagItemAsync(int id)
         {
-            var tagItem = await tagItemService.GetTagItemByIdAsync(id);
-            return View(mapper.Map<TagItemModel>(tagItem));
+            try
+            {
+                var tagItem = await tagItemService.GetTagItemByIdAsync(id);
+                return View(mapper.Map<TagItemModel>(tagItem));
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> RemoveTagItemAsync(TagItemModel model)
         {
-            var tagItem = await tagItemService.GetTagItemByIdAsync(model.Id);
-            await tagItemService.RemoveTagItem(tagItem);
-            return RedirectToAction("TagItemView", new { id = tagItem.ItemId});
+            try
+            {
+                var tagItem = await tagItemService.GetTagItemByIdAsync(model.Id);
+                await tagItemService.RemoveTagItem(tagItem);
+                return RedirectToAction("TagItemView", new { id = tagItem.ItemId });
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
          
 
         [HttpGet]
         public async Task<IActionResult> GetTagItemsForTagCloudAsync()
         {
-            var tagCloud = await tagItemService.TagCloudAsync();
-            tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count)); 
+            try
+            {
+                var tagCloud = await tagItemService.TagCloudAsync();
+                tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count));
 
-            return View(tagCloud.Select(x=>mapper.Map<TagItemModelForTagCloud>(x)).ToList());
+                return View(tagCloud.Select(x => mapper.Map<TagItemModelForTagCloud>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpGet]
         public async Task<IActionResult> GetItemsByTagNameAsync(string tagName)
         {
-            var tagItems = await tagItemService.GetItemsByTagNameAsync(tagName);
+            try
+            {
+                var tagItems = await tagItemService.GetItemsByTagNameAsync(tagName);
 
-            return View(tagItems.Select(x=>mapper.Map<TagItemModel>(x)).ToList());
+                return View(tagItems.Select(x => mapper.Map<TagItemModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
 
         [HttpGet]
         public async Task<IActionResult> GetTagItemsForSearchByNameInTagCloudAsync(string name)
         {
-            var tagCloud = await tagItemService.TagCloudAsync();
-            tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count));
+            try
+            {
+                var tagCloud = await tagItemService.TagCloudAsync();
+                tagCloud.Sort((x, y) => y.Count.CompareTo(x.Count));
 
-            var qwe = tagCloud.Where(x => x.TagName.Contains(name)).Select(x => mapper.Map<TagItemModelForTagCloud>(x)).ToList();
+                var qwe = tagCloud.Where(x => x.TagName.Contains(name)).Select(x => mapper.Map<TagItemModelForTagCloud>(x)).ToList();
 
-            return View(qwe);
+                return View(qwe);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
     }   

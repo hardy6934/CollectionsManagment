@@ -3,6 +3,7 @@ using CollectionsManagment.Core.Abstractrions;
 using CollectionsManagment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace CollectionsManagment.Controllers
 {
@@ -22,18 +23,36 @@ namespace CollectionsManagment.Controllers
 
         [HttpGet]
         public async Task<IActionResult> MainWindeowViewAsync()
-        { 
-            var topFiveColls = await collectionService.GetTopFiveBigestCollectionsAsync();
+        {
+            try
+            {
+                var topFiveColls = await collectionService.GetTopFiveBigestCollectionsAsync();
 
-            return View(topFiveColls.Select(x=>mapper.Map<CollectionModel>(x)).ToList());
+                return View(topFiveColls.Select(x => mapper.Map<CollectionModel>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
 
         [HttpGet]
         public async Task<IActionResult> GetLastCreatedItemsAsync()
-        { 
-            var items = await itemService.GetThreeLastCreatedItemsAsync();
+        {
+            try
+            {
+                var items = await itemService.GetThreeLastCreatedItemsAsync();
 
-            return View(items.Select(x=>mapper.Map<ItemsModelForMainPage>(x)).ToList());
+                return View(items.Select(x => mapper.Map<ItemsModelForMainPage>(x)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{ex.Message}. {Environment.NewLine}  {ex.StackTrace}");
+                return BadRequest();
+            }
+
         }
  
     }
